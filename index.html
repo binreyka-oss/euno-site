@@ -4,266 +4,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EUNO — Находим ценность. Создаем рост.</title>
+    <title>EUNO — Брендинговое агентство</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=PT+Root+UI:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/styles.css">
 
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "EUNO",
-        "url": "https://euno-site.vercel.app/",
-        "logo": "https://euno-site.vercel.app/assets/images/logo.png",
-        "contactPoint": [{
-            "@type": "ContactPoint",
-            "telephone": "+7-999-123-45-67",
-            "contactType": "customer service",
-            "areaServed": "RU"
-        }],
-        "description": "Находим уникальную ценность вашего бизнеса и превращаем её в измеримый рост и положительное влияние на людей и бизнес-среду."
-    }
-    </script>
-
-    <script type="text/javascript" >
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-        ym(00000000, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/00000000" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    </head>
+</head>
 <body>
-    <header class="topbar">
-        <div class="container topbar-flex">
-            <a href="#" class="brand">
-                <img src="assets/images/logo.png" alt="EUNO logo">
+
+    <header class="header">
+        <div class="container header__container">
+            <a href="#" class="header__logo">
+                <img src="assets/images/logo.png" alt="EUNO Logo">
             </a>
-            <nav class="topbar-nav">
-                <a href="#about">О нас</a>
-                <a href="#process">Процесс</a>
+            <nav class="header__nav">
+                <a href="#cases">Кейсы</a>
                 <a href="#services">Услуги</a>
+                <a href="#about">О нас</a>
                 <a href="#contact">Контакты</a>
             </nav>
-            <div class="contacts">
-                <a href="tel:+79991234567" class="phone">+7&nbsp;999&nbsp;123‑45‑67</a>
-                <a target="_blank" href="https://t.me/yourtelegram" class="icon-btn telegram" aria-label="Telegram"></a>
-                <a target="_blank" href="https://wa.me/79991234567" class="icon-btn whatsapp" aria-label="WhatsApp"></a>
-                <button class="cta-btn" data-open-modal>Обсудить проект</button>
+            <div class="header__contacts">
+                <a href="tel:+79991234567" class="header__phone">+7 999 123-45-67</a>
+                <button class="header__cta" data-open-modal>Обсудить проект</button>
             </div>
         </div>
     </header>
 
-    <section class="hero parallax">
-        <div class="container hero-content fade-in">
-            <h1>Находим уникальную ценность вашего&nbsp;бизнеса</h1>
-            <p class="subtitle">и превращаем её в измеримый рост и положительное влияние на людей и бизнес-среду.</p>
-            <button class="cta-btn" data-open-modal>Получить консультацию</button>
-        </div>
-    </section>
-
-    <section id="about" class="section fade-in">
-        <div class="container">
-            <h2>Наш подход: не красота, а ценность</h2>
-            <p style="max-width: 800px; margin: 0 auto; text-align: center;">Мы верим, что бизнес обязан приносить пользу людям и планете. Поэтому мы не занимаемся «дизайном ради дизайна». Наша цель — найти скрытую VALUE вашего дела и встроить ее в продукт, сервис и культуру. Мы помогаем хорошим компаниям становиться великими брендами.</p>
-            
-            <div class="sub-section">
-              <h3>Для кого мы работаем?</h3>
-              <p style="max-width: 800px; margin: 0 auto; text-align: center;">Наш клиент — **Transforming Visionary**. Это владелец или топ-менеджер в сфере HoReCa & Hospitality, который устал от поверхностных решений. Он говорит: «Мой бизнес — для людей, у него есть история, но нам нужна осмысленная упаковка и KPI-подтверждение её ценности». Если это про вас — мы сработаемся.</p>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>EUNO — брендинговое агентство. Находим уникальную ценность бизнеса и&nbsp;превращаем её в&nbsp;измеримый рост.</h1>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="process" class="section alt-bg">
-        <div class="container fade-in">
-            <h2>Как мы находим вашу VALUE</h2>
-            <div class="accordion">
-                <div class="accordion-item">
-                    <button class="accordion-header">1. Discovery (Погружение и исследование)</button>
-                    <div class="accordion-body">
-                        <p>Это фундамент проекта. Мы проводим стратегический воркшоп, глубинные JTBD-интервью с вашими клиентами, анализируем конкурентов и рынок. Результат этапа — набор подтвержденных инсайтов и гипотез для роста. </p>
-                    </div>
-                </div>
-                <div class="accordion-item active">
-                    <button class="accordion-header">2. Strategy (Разработка бренд-платформы)</button>
-                    <div class="accordion-body">
-                        <p>Превращаем инсайты в управляемую систему. Создаем Brand-OS — ядро вашего бренда, включающее архетип, позиционирование, Tone of Voice и пирамиду сообщений.  Это ваш стратегический компас для принятия всех бизнес-решений.</p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">3. Delivery (Внедрение и запуск)</button>
-                    <div class="accordion-body">
-                        <p>Воплощаем стратегию в жизнь. Разрабатываем визуальную айдентику, создаем Staff Playbook для обучения команды, настраиваем KPI-дашборд для отслеживания результатов и передаем вам все мастер-файлы. </p>
-                    </div>
-                </div>
-                <div class="accordion-item">
-                    <button class="accordion-header">4. Follow-Up (Поддержка и рост)</button>
-                    <div class="accordion-body">
-                        <p>Наша работа не заканчивается после сдачи проекта. Мы готовим детальный Impact-Report с анализом достигнутых KPI, пишем и публикуем совместный кейс, чтобы усилить ваш бренд на рынке. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="section fade-in">
-        <div class="container">
-            <h2>Основные услуги</h2>
-            <div class="cards">
-                <div class="card">
-                    <h3>P1 «Маркет-Снимок»</h3>
-                    <p class="price"><span class="new">79 000 ₽</span></p>
-                    <p class="note">Определяем вашу точку "А" и находим три главных приоритета для роста.</p>
-                    <ul>
-                        <li>SWOT и PESTEL анализ</li>
-                        <li>Мини-аудит конкурентов (5-7 KPI)</li>
-                        <li>Анализ трендов (Trend Canvas 2.0)</li>
-                        <li>Глубинные интервью с гостями (JTBD)</li>
-                        <li>Аудит сервиса на месте (2 часа)</li>
-                    </ul>
-                    <button class="card-cta" data-open-modal>Заказать аудит</button>
-                </div>
-                <div class="card card-popular">
-                    <div class="popular-badge">Оптимальный выбор</div>
-                    <h3>P2 «Бренд-Платформа PRO»</h3>
-                    <p class="price"><span class="new">390 000 ₽</span></p>
-                    <p class="note">Создаем готовую бренд-систему и дорожную карту для роста RevPASH/NPS.</p>
-                    <ul>
-                        <li>Всё из пакета P1</li>
-                        <li>Полная платформа бренда (Brand-OS)</li>
-                        <li>Позиционирование меню и CX-Blueprint</li>
-                        <li>Мини-гайд по визуалу (лого, цвета, шрифты)</li>
-                        <li>Дорожная карта внедрения на 90 дней</li>
-                        <li>Воркшоп для топ-менеджмента</li>
-                    </ul>
-                    <button class="card-cta" data-open-modal>Обсудить проект</button>
-                </div>
-                <div class="card">
-                    <h3>РЗ «Полная Трансформация»</h3>
-                    <p class="price"><span class="new">650 000 ₽</span></p>
-                    <p class="note">Глубокое внедрение на уровне всего персонала для максимального роста.</p>
-                     <ul>
-                        <li>Всё из пакета P2</li>
-                        <li>Глубокое обучение персонала (4 модуля, 20 ч)</li>
-                        <li>Инжиниринг меню (Menu-Engineering)</li>
-                        <li>LLМ-ассистенты и KPI-панель управления</li>
-                        <li>3 проверки «Тайный гость»</li>
-                        <li>Стратегический коучинг (6 недель)</li>
-                    </ul>
-                    <button class="card-cta" data-open-modal>Стать клиентом</button>
+        <section id="cases" class="cases">
+            <div class="container">
+                <h2 class="section-title">Кейсы</h2>
+                <div class="cases-grid">
+                    <a href="#" class="case-card">
+                        <div class="case-card__image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDE2fDEwNjU5NTV8fHx8fDJ8fDE2OTE2NzExMDh8&ixlib=rb-4.0.3&q=80&w=1200" alt="Название проекта 1">
+                        </div>
+                        <div class="case-card__info">
+                            <h3 class="case-card__title">Название проекта 1</h3>
+                            <p class="case-card__desc">Краткое описание проекта, сфера. HoReCa.</p>
+                        </div>
+                    </a>
+                    <a href="#" class="case-card">
+                        <div class="case-card__image-wrapper">
+                             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDF8MTA2NTk1NXx8fHx8Mnx8MTY5MTY3MTEwOHw&ixlib=rb-4.0.3&q=80&w=1200" alt="Название проекта 2">
+                        </div>
+                        <div class="case-card__info">
+                            <h3 class="case-card__title">Название проекта 2</h3>
+                            <p class="case-card__desc">Краткое описание проекта, сфера. Hospitality.</p>
+                        </div>
+                    </a>
+                     <a href="#" class="case-card">
+                        <div class="case-card__image-wrapper">
+                             <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDR8MTA2NTk1NXx8fHx8Mnx8MTY5MTY3MTEwOHw&ixlib=rb-4.0.3&q=80&w=1200" alt="Название проекта 3">
+                        </div>
+                        <div class="case-card__info">
+                            <h3 class="case-card__title">Название проекта 3</h3>
+                            <p class="case-card__desc">Краткое описание проекта, сфера. Retail.</p>
+                        </div>
+                    </a>
+                     <a href="#" class="case-card">
+                        <div class="case-card__image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1600880292210-85938c039953?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDEyfDEwNjU5NTV8fHx8fDJ8fDE2OTE2NzExMDh8&ixlib=rb-4.0.3&q=80&w=1200" alt="Название проекта 4">
+                        </div>
+                        <div class="case-card__info">
+                            <h3 class="case-card__title">Название проекта 4</h3>
+                            <p class="case-card__desc">Краткое описание проекта, сфера. Services.</p>
+                        </div>
+                    </a>
                 </div>
             </div>
-            
-            <div class="sub-section fade-in">
-              <h2>Постоянная поддержка и рост</h2>
-              <p style="max-width: 800px; margin: 1rem auto 2rem; text-align: center;">Для тех, кто хочет не просто запустить, а постоянно усиливать свой бренд, мы предлагаем подписки-сопровождение.</p>
-              <div class="cards">
-                  <div class="card">
-                      <h3>S-1 «Пульс»</h3>
-                      <p class="price"><span class="new">24 900 ₽</span><span class="price-period">/ мес.</span></p>
-                      <p class="note">Мониторинг ключевых показателей бренда.</p>
-                      <ul>
-                          <li>Доступ к панели (10 KPI)</li>
-                          <li>1-часовой стратегический звонок</li>
-                          <li>Квартальный мини-аудит в PDF</li>
-                      </ul>
-                      <button class="card-cta" data-open-modal>Выбрать «Пульс»</button>
-                  </div>
-                  <div class="card">
-                      <h3>S-2 «Драйв»</h3>
-                      <p class="price"><span class="new">59 900 ₽</span><span class="price-period">/ мес.</span></p>
-                      <p class="note">Активная работа над контентом и меню для роста среднего чека.</p>
-                      <ul>
-                          <li>Всё из S-1</li>
-                          <li>А/В-тест меню (1 позиция/мес.)</li>
-                          <li>Контент-календарь и 16 SMM-постов</li>
-                          <li>Квартальный воркшоп на месте</li>
-                          <li>Обновление staff-скриптов</li>
-                      </ul>
-                      <button class="card-cta" data-open-modal>Выбрать «Драйв»</button>
-                  </div>
-                  <div class="card">
-                      <h3>S-3 «Экспансия»</h3>
-                      <p class="price"><span class="new">119 000 ₽</span><span class="price-period">/ мес.</span></p>
-                      <p class="note">Стратегическая поддержка для масштабирования и выхода на новые рынки.</p>
-                      <ul>
-                          <li>Всё из S-2</li>
-                          <li>Идея pop-up / dark-kitchen (1/кв.)</li>
-                          <li>Поддержка по созданию Franchise Playbook</li>
-                          <li>Дизайн-поддержка (до 30 ч/мес.)</li>
-                          <li>Квартальный инновационный спринт</li>
-                      </ul>
-                      <button class="card-cta" data-open-modal>Выбрать «Экспансию»</button>
-                  </div>
-              </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="metrics" class="section alt-bg">
-        <div class="container fade-in">
-            <h2>Наши цели — ваши результаты</h2>
-            <div class="metrics-grid">
-                <div class="metric">
-                    <span class="count" data-count="5">0</span><span class="suffix">%</span>
-                    <p>Рост RevPASH*</p>
+        </section>
+        
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Услуги</h2>
+                <div class="service-item">
+                    <h3 class="service-item__title">Бренд-стратегия</h3>
+                    <p class="service-item__desc">Исследуем рынок, аудиторию и ваш бизнес, чтобы найти уникальную ценность и сформулировать платформу бренда: от архетипа и миссии до голоса и ключевых сообщений.</p>
+                    <div class="service-item__price">от 79 000 ₽</div>
                 </div>
-                <div class="metric">
-                    <span class="count" data-count="20">0</span><span class="suffix">%</span>
-                    <p>Рост eNPS*</p>
+                <div class="service-item">
+                    <h3 class="service-item__title">Айдентика и дизайн</h3>
+                    <p class="service-item__desc">Превращаем стратегию в визуальный язык. Разрабатываем логотип, фирменный стиль, дизайн ключевых носителей и создаем гайдлайны для последовательной коммуникации.</p>
+                    <div class="service-item__price">от 120 000 ₽</div>
                 </div>
-                <div class="metric">
-                    <span class="count" data-count="15">0</span><span class="suffix">%</span>
-                    <p>Снижение отходов*</p>
+                <div class="service-item">
+                    <h3 class="service-item__title">Внедрение и поддержка</h3>
+                    <p class="service-item__desc">Помогаем бренду жить и работать. Обучаем команды, разрабатываем плейбуки для персонала, настраиваем KPI-дашборды и оказываем поддержку на основе ежемесячной подписки.</p>
+                    <div class="service-item__price">от 24 900 ₽/мес</div>
                 </div>
             </div>
-            <p class="placeholder-note">*Целевые показатели из нашего Reason-to-Believe. Мы определим и гарантируем KPI конкретно для вашего бизнеса.</p>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="section fade-in">
-        <div class="container" style="text-align: center;">
-            <h2>Давайте обсудим ваш проект</h2>
-            <p>Заполните форму, и мы свяжемся с вами в течение рабочего дня для первичной консультации.</p>
-            <form id="lead-form">
-                <label>Имя<input type="text" name="name" required></label>
-                <label>Телефон<input type="tel" name="phone" required></label>
-                <label>Email<input type="email" name="email" required></label>
-                <label>Компания<input type="text" name="company"></label>
+        <section id="about" class="about">
+            <div class="container about__container">
+                <div class="about__text">
+                    <h2 class="section-title">О нас</h2>
+                    <p>Мы — команда стратегов и дизайнеров. Мы верим, что сильный бренд — это не красивая картинка, а система, которая помогает бизнесу расти, привлекать лучших людей и создавать лояльное сообщество.</p>
+                    <p>Наш подход — это синтез аналитики и креатива (Sage x Creator). Мы не предлагаем шаблонных решений. Каждый проект для нас — это глубокое погружение в бизнес клиента для поиска той самой, настоящей ценности (VALUE).</p>
+                </div>
+                <div class="about__image">
+                     <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDE3fDEwNjU5NTV8fHx8fDJ8fDE2OTE2NzExMDh8&ixlib=rb-4.0.3&q=80&w=800" alt="Команда EUNO">
+                </div>
+            </div>
+        </section>
 
-                <label class="consent">
-                    <input type="checkbox" name="consent" required> Я соглашаюсь на обработку персональных данных
-                </label>
-                <button type="submit" class="cta-btn">Отправить заявку</button>
-            </form>
-            <p class="small">Или свяжитесь напрямую: <a href="tel:+79991234567">+7 999 123‑45‑67</a></p>
-        </div>
-    </section>
+        <section id="contact" class="contact">
+            <div class="container">
+                 <h2 class="section-title">Давайте работать вместе</h2>
+                 <p class="contact__subtitle">Расскажите о вашей задаче, и мы свяжемся с вами, чтобы назначить первую встречу-знакомство.</p>
+                 <a href="mailto:hello@euno.agency" class="contact__email">hello@euno.agency</a>
+                 <div class="contact__socials">
+                     <a href="https://t.me/yourtelegram" target="_blank">Telegram</a>
+                     <a href="https://wa.me/79991234567" target="_blank">WhatsApp</a>
+                 </div>
+            </div>
+        </section>
+    </main>
 
-    <footer>
-        <div class="container footer-flex">
-            <p>© 2025 EUNO. Все права защищены.</p>
-            <nav>
-                <a href="privacy.html">Политика конфиденциальности</a>
-                <a href="terms.html">Пользовательское соглашение</a>
-            </nav>
+    <footer class="footer">
+        <div class="container footer__container">
+            <p>© EUNO 2025</p>
+            <p>Ты знаешь, что ценно</p>
+            <a href="#top">Наверх</a>
         </div>
     </footer>
-
+    
     <div class="modal" id="modal">
         <div class="modal-content">
             <button class="modal-close" data-close-modal>&times;</button>
-            <h3>Оставить заявку</h3>
-             <p style="margin-bottom: 1rem; font-size: .9rem;">Мы свяжемся с вами, чтобы договориться о времени для бесплатной консультации.</p>
+            <h3>Обсудить проект</h3>
+            <p style="margin-bottom: 1rem; font-size: .9rem;">Заполните форму, и мы свяжемся с вами в течение рабочего дня.</p>
             <form id="lead-form-modal">
                 <label>Имя<input type="text" name="name" required></label>
                 <label>Телефон<input type="tel" name="phone" required></label>
                 <label>Email<input type="email" name="email" required></label>
                 <label>Компания<input type="text" name="company"></label>
-
                 <label class="consent">
                     <input type="checkbox" name="consent" required> Я соглашаюсь на обработку персональных данных
                 </label>
@@ -273,45 +158,5 @@
     </div>
 
     <script src="assets/js/script.js" defer></script>
-    <style>
-      .sub-section {
-        margin-top: 100px;
-      }
-      .sub-section h3 {
-        text-align: center;
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-      }
-      .card-popular {
-        position: relative;
-        border: 2px solid var(--accent);
-        transform: scale(1.03);
-        box-shadow: 0 15px 30px rgba(0,0,0,.1);
-      }
-      .popular-badge {
-        position: absolute;
-        top: -16px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--accent);
-        color: var(--white);
-        padding: 6px 16px;
-        border-radius: 20px;
-        font-size: .8rem;
-        font-weight: 700;
-        z-index: 2;
-      }
-      .price-period {
-        font-size: 1rem;
-        font-weight: 400;
-        color: #777;
-        margin-left: 5px;
-      }
-      @media(max-width: 768px) {
-        .card-popular {
-          transform: none; /* Убираем увеличение на мобильных, чтобы не ломать сетку */
-        }
-      }
-    </style>
 </body>
 </html>
