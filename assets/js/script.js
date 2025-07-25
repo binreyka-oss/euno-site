@@ -18,20 +18,23 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         
         const numColumns = 6;
-        const slogansPerColumn = Math.ceil(slogans.length / numColumns) * 2; // Умножаем на 2 для бесшовной прокрутки
+        const slogansPerColumn = slogans.length; 
 
         for (let i = 0; i < numColumns; i++) {
             const column = document.createElement('div');
             column.className = 'slogan-column';
-            // Чередуем направление прокрутки
             column.classList.add(i % 2 === 0 ? 'scroll-up' : 'scroll-down');
+            
+            const contentWrapper = document.createElement('div');
             
             let columnContent = '';
             for (let j = 0; j < slogansPerColumn; j++) {
-                // Зацикливаем массив слоганов
-                columnContent += `<span>${slogans[(i * slogansPerColumn + j) % slogans.length]}</span>`;
+                columnContent += `<span>${slogans[(i * 3 + j) % slogans.length]}</span>`;
             }
-            column.innerHTML = columnContent;
+            
+            // Дублируем контент для бесшовной прокрутки
+            contentWrapper.innerHTML = columnContent + columnContent;
+            column.appendChild(contentWrapper);
             wallContainer.appendChild(column);
         }
     }
@@ -48,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
             body.classList.toggle('no-scroll');
         });
         
-        // Закрывать меню при клике на ссылку
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 burger.classList.remove('active');
@@ -96,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         button.disabled = true;
         button.textContent = 'Отправка...';
         try {
-            // ВАЖНО: '/api/lead' - это пример. Укажите здесь свой URL для обработки формы
             const res = await fetch('/api/lead', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
