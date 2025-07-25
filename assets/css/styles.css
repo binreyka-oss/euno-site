@@ -51,7 +51,7 @@ main { padding-top: 80px; }
 .process-progress-bar { width: 100%; background-color: var(--border-color); height: 2px; margin-bottom: 20px; }
 .process-progress-bar__fill { width: 20%; height: 100%; background-color: var(--accent-red); transition: width 0.4s ease; }
 .process-tabs { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); margin-bottom: 40px; }
-.process-tab { padding: 15px 0; cursor: pointer; font-family: var(--font-headings); font-size: 1.1rem; color: var(--gray); position: relative; flex-grow: 1; text-align: center; transition: color .3s ease; }
+.process-tab { padding: 15px 5px; cursor: pointer; font-family: var(--font-headings); font-size: 1rem; color: var(--gray); position: relative; flex-grow: 1; text-align: center; transition: color .3s ease; white-space: nowrap; }
 .process-tab span { font-size: .8rem; margin-right: 8px; }
 .process-tab.active { color: var(--black); }
 .process-tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--accent-red); }
@@ -70,7 +70,9 @@ main { padding-top: 80px; }
 .card h3 { font-family: var(--font-headings); font-size: 1.5rem; margin-bottom: 1rem; }
 .card .price { margin-bottom: 1rem; }
 .card .price .old-price { font-size: 1.2rem; color: var(--gray); text-decoration: line-through; margin-right: 10px; }
-.card .price .new-price, .card .price.single-price { font-family: var(--font-headings); font-size: 2rem; }
+.card .price .new-price { font-family: var(--font-headings); font-size: 2rem; }
+.card .price .price-highlight { color: var(--accent-red); }
+.card .price.single-price { font-family: var(--font-headings); font-size: 2rem; }
 .card .price.single-price span { font-size: 1rem; color: var(--gray); font-family: var(--font-main); }
 .card .note { color: var(--gray); font-size: .9rem; margin-bottom: 1.5rem; }
 .card .note.final-price { font-weight: bold; color: var(--black); margin-top: 1.5rem; }
@@ -79,6 +81,9 @@ main { padding-top: 80px; }
 .card ul li::before { content: '✓'; color: var(--black); position: absolute; left: 0; }
 .card .card-cta { background: var(--black); color: var(--white); border: 1px solid var(--black); padding: 15px; text-align: center; font-weight: 500; cursor: pointer; margin-top: auto; transition: background .3s, color .3s; }
 .card .card-cta:hover { background: var(--white); color: var(--black); }
+.card-optimal .card-cta, .card-premium .card-cta { background: var(--accent-red); border-color: var(--accent-red); }
+.card-optimal .card-cta:hover, .card-premium .card-cta:hover { background: var(--white); color: var(--accent-red); }
+
 
 /* Card Badges */
 .card-optimal, .card-premium { position: relative; border-width: 2px; }
@@ -130,8 +135,11 @@ main { padding-top: 80px; }
     .header__tagline { display: none; }
     .header__nav { display: none; }
     .header__actions { gap: 15px; }
-    .process-tabs { flex-direction: column; }
-    .process-tab { border-bottom: 1px solid var(--border-color); }
-    .process-tab.active::after { width: 100%; height: 1px; }
+    .process-tabs { flex-wrap: wrap; }
+    .process-tab { flex-basis: 50%; white-space: normal; }
     .metrics-grid { grid-template-columns: 1fr; gap: 60px; }
+}
+
+@media(max-width: 480px) {
+    .process-tab { flex-basis: 100%; text-align: left; padding-left: 10px; }
 }
