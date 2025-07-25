@@ -18,76 +18,101 @@ document.addEventListener('DOMContentLoaded', () => {
             "ты знаешь, как найти путь", "ты знаешь, что движет прогрессом", "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
             "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал"
         ];
-        const bubbles = [];
+        let bubbles = [];
+        let bounds = sloganContainer.getBoundingClientRect();
 
-        const headline = document.getElementById('main-headline');
-        const deadZoneRect = headline.getBoundingClientRect();
-        const deadZone = {
-            top: deadZoneRect.top - 100,
-            right: deadZoneRect.right + 100,
-            bottom: deadZoneRect.bottom + 100,
-            left: deadZoneRect.left - 100,
-        };
-
-        slogans.forEach(sloganText => {
-            const span = document.createElement('div');
-            span.className = 'slogan-bubble';
-            span.textContent = sloganText;
-            
-            const size = 120 + Math.random() * 50; // Smaller bubbles
-            const bubble = {
-                element: span,
-                x: 0,
-                y: 0,
-                vx: (Math.random() - 0.5) * 0.45, // 1.5x faster
-                vy: (Math.random() - 0.5) * 0.45, // 1.5x faster
-                size: size,
-                radius: size / 2
+        function createBubbles() {
+            bubbles = [];
+            sloganContainer.innerHTML = ''; // Clear existing bubbles
+            bounds = sloganContainer.getBoundingClientRect();
+            const headline = document.getElementById('main-headline');
+            const deadZoneRect = headline.getBoundingClientRect();
+            const deadZone = {
+                top: deadZoneRect.top - bounds.top - 50,
+                right: deadZoneRect.right - bounds.left + 50,
+                bottom: deadZoneRect.bottom - bounds.top + 50,
+                left: deadZoneRect.left - bounds.left - 50,
             };
-            
-            do {
-                bubble.x = Math.random() * sloganContainer.offsetWidth;
-                bubble.y = Math.random() * sloganContainer.offsetHeight;
-            } while (
-                bubble.x + size > deadZone.left && bubble.x < deadZone.right &&
-                bubble.y + size > deadZone.top && bubble.y < deadZone.bottom
-            );
 
-            span.style.width = `${size}px`;
-            span.style.height = `${size}px`;
-            sloganContainer.appendChild(span);
-            bubbles.push(bubble);
-        });
+            slogans.forEach(sloganText => {
+                const span = document.createElement('div');
+                span.className = 'slogan-bubble';
+                span.textContent = sloganText;
+                
+                const size = 110 + Math.random() * 60; // Adjusted size
+                const bubble = {
+                    element: span,
+                    x: 0,
+                    y: 0,
+                    vx: (Math.random() - 0.5) * 0.7, // Faster speed
+                    vy: (Math.random() - 0.5) * 0.7, // Faster speed
+                    size: size,
+                    radius: size / 2
+                };
+                
+                do {
+                    bubble.x = Math.random() * (bounds.width - size);
+                    bubble.y = Math.random() * (bounds.height - size);
+                } while (
+                    bubble.x + size > deadZone.left && bubble.x < deadZone.right &&
+                    bubble.y + size > deadZone.top && bubble.y < deadZone.bottom
+                );
 
+                span.style.width = `${size}px`;
+                span.style.height = `${size}px`;
+                sloganContainer.appendChild(span);
+                bubbles.push(bubble);
+            });
+        }
+        
         function animateBubbles() {
             bubbles.forEach((bubble, i) => {
-                // Movement
                 bubble.x += bubble.vx;
                 bubble.y += bubble.vy;
 
                 // Wall collision
-                if (bubble.x < 0 || bubble.x > sloganContainer.offsetWidth - bubble.size) bubble.vx *= -1;
-                if (bubble.y < 0 || bubble.y > sloganContainer.offsetHeight - bubble.size) bubble.vy *= -1;
+                if (bubble.x <= 0) { bubble.x = 0; bubble.vx *= -1; }
+                if (bubble.x >= bounds.width - bubble.size) { bubble.x = bounds.width - bubble.size; bubble.vx *= -1; }
+                if (bubble.y <= 0) { bubble.y = 0; bubble.vy *= -1; }
+                if (bubble.y >= bounds.height - bubble.size) { bubble.y = bounds.height - bubble.size; bubble.vy *= -1; }
 
                 // Bubble-to-bubble collision
                 for (let j = i + 1; j < bubbles.length; j++) {
                     const otherBubble = bubbles[j];
-                    const dx = otherBubble.x - bubble.x;
-                    const dy = otherBubble.y - bubble.y;
+                    const dx = (otherBubble.x + otherBubble.radius) - (bubble.x + bubble.radius);
+                    const dy = (otherBubble.y + otherBubble.radius) - (bubble.y + bubble.radius);
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     const minDistance = bubble.radius + otherBubble.radius;
 
                     if (distance < minDistance) {
-                        // Simple velocity swap for elastic collision effect
-                        [bubble.vx, otherBubble.vx] = [otherBubble.vx, bubble.vx];
-                        [bubble.vy, otherBubble.vy] = [otherBubble.vy, bubble.vy];
+                        const angle = Math.atan2(dy, dx);
+                        const overlap = minDistance - distance;
+
+                        // Resolve overlap
+                        const resolveX = (overlap / 2) * Math.cos(angle);
+                        const resolveY = (overlap / 2) * Math.sin(angle);
+                        
+                        bubble.x -= resolveX;
+                        bubble.y -= resolveY;
+                        otherBubble.x += resolveX;
+                        otherBubble.y += resolveY;
+                        
+                        // Elastic collision response
+                        const tempVx = bubble.vx;
+                        const tempVy = bubble.vy;
+                        bubble.vx = otherBubble.vx;
+                        bubble.vy = otherBubble.vy;
+                        otherBubble.vx = tempVx;
+                        otherBubble.vy = tempVy;
                     }
                 }
                 bubble.element.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
             });
             requestAnimationFrame(animateBubbles);
         }
-        animateBubbles();
+
+        createBubbles();
+        window.addEventListener('resize', createBubbles); // Recreate bubbles on resize for responsiveness
     }
 
 
