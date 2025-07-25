@@ -13,7 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
             "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
             "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия", 
             "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
-            "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше"
+            "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше", "ты знаешь, как оставить наследие",
+            "ты знаешь, что заставляет гордиться", "ты знаешь, как изменить мир", "ты знаешь, где лежит истина",
+            "ты знаешь, как найти путь", "ты знаешь, что движет прогрессом", "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
+            "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал"
         ];
         let bubbles = [];
         let animationFrameId;
@@ -24,21 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             bubbles = [];
             sloganContainer.innerHTML = '';
-            
             const bounds = sloganContainer.getBoundingClientRect();
-            if (bounds.width === 0 || bounds.height === 0) {
-                return; // Stop if container is not ready
-            }
+            if (bounds.width === 0 || bounds.height === 0) return; // Exit if container has no dimensions
 
             const headline = document.getElementById('main-headline');
             const deadZoneRect = headline.getBoundingClientRect();
-            const containerRect = sloganContainer.getBoundingClientRect();
-
             const deadZone = {
-                top: deadZoneRect.top - containerRect.top - 50,
-                right: deadZoneRect.right - containerRect.left + 50,
-                bottom: deadZoneRect.bottom - containerRect.top + 50,
-                left: deadZoneRect.left - containerRect.left - 50,
+                top: deadZoneRect.top - bounds.top - 50,
+                right: deadZoneRect.right - bounds.left + 50,
+                bottom: deadZoneRect.bottom - bounds.top + 50,
+                left: deadZoneRect.left - bounds.left - 50,
             };
 
             slogans.forEach(sloganText => {
@@ -48,10 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const size = 120 + Math.random() * 50;
                 const bubble = {
-                    element: span, x: 0, y: 0,
-                    vx: (Math.random() - 0.5) * 1.0,
-                    vy: (Math.random() - 0.5) * 1.0,
-                    size: size, radius: size / 2
+                    element: span,
+                    x: 0,
+                    y: 0,
+                    vx: (Math.random() - 0.5) * 0.7,
+                    vy: (Math.random() - 0.5) * 0.7,
+                    size: size,
+                    radius: size / 2
                 };
                 
                 do {
@@ -64,13 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 span.style.width = `${size}px`;
                 span.style.height = `${size}px`;
-                // Set initial position before appending to avoid flash at 0,0
-                span.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
                 sloganContainer.appendChild(span);
                 bubbles.push(bubble);
             });
-            
-            animateBubbles(); // Start animation only after successful creation
+            animateBubbles(); // Start animation after creation
         }
         
         function animateBubbles() {
@@ -111,23 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             animationFrameId = requestAnimationFrame(animateBubbles);
         }
-        
-        // --- THE DEFINITIVE FIX ---
-        // This function checks if the container is ready and initializes the animation.
-        function tryInitAnimation() {
-            const bounds = sloganContainer.getBoundingClientRect();
-            if (bounds.width > 0 && bounds.height > 0) {
-                createBubbles();
-            } else {
-                // If not ready, wait a bit and try again.
-                setTimeout(tryInitAnimation, 100);
-            }
-        }
-        
-        // Start the process after the entire page is loaded.
-        window.addEventListener('load', tryInitAnimation);
+
+        // --- THE FIX ---
+        // Wait for the entire window to load, ensuring CSS is applied and dimensions are correct.
+        window.addEventListener('load', createBubbles);
         window.addEventListener('resize', createBubbles); 
     }
+
 
     // --- Cursor Trail ---
     const cursorArea = document.querySelector('.custom-cursor-area');
@@ -160,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 
     // --- Interactive Process Tabs ---
     const tabs = document.querySelectorAll('.process-tab');
@@ -226,4 +215,5 @@ document.addEventListener('DOMContentLoaded', () => {
             sendLead(e.target, submitButton);
         });
     });
+
 });
