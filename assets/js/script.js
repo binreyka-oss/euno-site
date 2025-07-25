@@ -6,25 +6,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const contents = document.querySelectorAll('.process-content');
     const progressBarFill = document.getElementById('progressBarFill');
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            const phase = tab.dataset.phase;
+    if (tabs.length > 0 && contents.length > 0 && progressBarFill) {
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const phase = tab.dataset.phase;
 
-            // Update tabs
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
+                // Update tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
 
-            // Update content
-            contents.forEach(c => c.classList.remove('active'));
-            document.querySelector(`.process-content[data-phase="${phase}"]`).classList.add('active');
-            
-            // Update progress bar
-            if (progressBarFill) {
+                // Update content
+                contents.forEach(c => c.classList.remove('active'));
+                document.querySelector(`.process-content[data-phase="${phase}"]`).classList.add('active');
+                
+                // Update progress bar
                 const progress = parseInt(phase) * 20;
                 progressBarFill.style.width = `${progress}%`;
-            }
+            });
         });
-    });
+    }
 
 
     // --- Modal Logic ---
