@@ -21,6 +21,7 @@ a:hover { color: var(--accent-red); }
 img { max-width: 100%; height: auto; display: block; }
 .section-title { font-family: var(--font-headings); font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 20px; font-weight: 400; text-align: center; }
 .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--gray); margin-bottom: 60px; }
+.section-divider { border: none; height: 1px; background-color: var(--border-color); margin: 0; }
 
 /* HEADER */
 .header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border-color); }
@@ -40,21 +41,37 @@ img { max-width: 100%; height: auto; display: block; }
 .hero { min-height: 90vh; display: flex; align-items: center; text-align: center; overflow: hidden; }
 .hero__container { position: relative; width: 100%; }
 .hero h1 { font-family: var(--font-headings); font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.3; max-width: 1000px; font-weight: 400; margin: 0 auto; position: relative; z-index: 2; }
-.hero__slogans-bg { position: absolute; inset: -100px; z-index: 1; user-select: none; pointer-events: none; }
-.slogan-bubble { position: absolute; font-family: var(--font-headings); font-weight: 500; padding: 10px 20px; border-radius: 50px; text-align: center; line-height: 1.4; will-change: transform; }
+.hero__slogans-bg { position: absolute; inset: -150px; z-index: 1; user-select: none; pointer-events: none; }
+.slogan-bubble {
+    position: absolute;
+    font-family: var(--font-headings);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1.4;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--black);
+    color: var(--black);
+}
 
 /* PRINCIPLES */
-.principles { padding: 100px 0; background: var(--light-gray); }
+.principles { padding: 120px 0; background: var(--white); }
 .principles .container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .principle-item__title { font-family: var(--font-headings); font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-red); }
 
 /* PROCESS */
-.process { padding: 120px 0; }
-.process-interactive { max-width: 900px; margin: 0 auto; }
+.process { padding: 120px 0; background: var(--white); }
+.process-interactive { max-width: 1000px; margin: 0 auto; }
 .process-progress-bar { width: 100%; background-color: var(--border-color); height: 2px; margin-bottom: 20px; }
 .process-progress-bar__fill { width: 20%; height: 100%; background-color: var(--accent-red); transition: width 0.4s ease; }
 .process-tabs { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); margin-bottom: 40px; }
-.process-tab { padding: 15px 5px; cursor: pointer; font-family: var(--font-headings); font-size: 1rem; color: var(--gray); position: relative; flex-grow: 1; text-align: center; transition: color .3s ease; white-space: nowrap; }
+.process-tab { padding: 15px 10px; margin: 0 5px; cursor: pointer; font-family: var(--font-headings); font-size: 1rem; color: var(--gray); position: relative; flex-grow: 1; text-align: center; transition: color .3s ease; white-space: nowrap; }
 .process-tab span { font-size: .8rem; margin-right: 8px; }
 .process-tab.active { color: var(--black); }
 .process-tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 2px; background: var(--accent-red); }
@@ -130,10 +147,9 @@ img { max-width: 100%; height: auto; display: block; }
     z-index: 9999;
     font-size: 2rem;
     opacity: 1;
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
     transform: translate(-50%, -50%) rotate(0deg) scale(1);
 }
-
 
 /* RESPONSIVE */
 @media(max-width: 1024px) {
@@ -147,7 +163,7 @@ img { max-width: 100%; height: auto; display: block; }
     .process-tabs { flex-wrap: wrap; }
     .process-tab { flex-basis: 50%; white-space: normal; }
     .metrics-grid { grid-template-columns: 1fr; gap: 60px; }
-    .hero__slogans-bg { display: none; } /* Скрываем сложный фон на мобильных для производительности */
+    .hero__slogans-bg { display: none; }
 }
 @media(max-width: 480px) {
     .process-tab { flex-basis: 100%; text-align: left; padding-left: 10px; }
