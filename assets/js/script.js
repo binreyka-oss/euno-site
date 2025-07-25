@@ -5,12 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const sloganContainer = document.getElementById('slogans-container');
     if (sloganContainer && window.matchMedia("(min-width: 769px)").matches) {
         const slogans = [
-            "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", 
-            "ты знаешь силу бренда", "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", 
-            "ты знаешь где твое преимущество", "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять",
-            "ты знаешь свое влияние", "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам", 
-            "ты знаешь что двигает рынок", "ты знаешь как выделиться", "ты знаешь, что мотивирует", "ты знаешь, что вдохновляет людей", 
-            "ты знаешь как управлять вниманием", "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
+            "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
+            "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", "ты знаешь где твое преимущество",
+            "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять", "ты знаешь свое влияние", 
+            "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам", "ты знаешь что двигает рынок", 
+            "ты знаешь как выделиться", "ты знаешь, что мотивирует", "ты знаешь, что вдохновляет людей", "ты знаешь как управлять вниманием",
+            "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
             "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия", 
             "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
             "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше"
@@ -24,16 +24,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             bubbles = [];
             sloganContainer.innerHTML = '';
+            
             const bounds = sloganContainer.getBoundingClientRect();
-            if (bounds.width === 0 || bounds.height === 0) return;
+            if (bounds.width === 0 || bounds.height === 0) {
+                return; // Stop if container is not ready
+            }
 
             const headline = document.getElementById('main-headline');
             const deadZoneRect = headline.getBoundingClientRect();
+            const containerRect = sloganContainer.getBoundingClientRect();
+
             const deadZone = {
-                top: deadZoneRect.top - bounds.top - 50,
-                right: deadZoneRect.right - bounds.left + 50,
-                bottom: deadZoneRect.bottom - bounds.top + 50,
-                left: deadZoneRect.left - bounds.left - 50,
+                top: deadZoneRect.top - containerRect.top - 50,
+                right: deadZoneRect.right - containerRect.left + 50,
+                bottom: deadZoneRect.bottom - containerRect.top + 50,
+                left: deadZoneRect.left - containerRect.left - 50,
             };
 
             slogans.forEach(sloganText => {
@@ -41,15 +46,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 span.className = 'slogan-bubble';
                 span.textContent = sloganText;
                 
-                const size = 130 + Math.random() * 50;
+                const size = 120 + Math.random() * 50;
                 const bubble = {
-                    element: span,
-                    x: 0,
-                    y: 0,
-                    vx: (Math.random() - 0.5) * 1.0, // Increased speed
-                    vy: (Math.random() - 0.5) * 1.0, // Increased speed
-                    size: size,
-                    radius: size / 2
+                    element: span, x: 0, y: 0,
+                    vx: (Math.random() - 0.5) * 1.0,
+                    vy: (Math.random() - 0.5) * 1.0,
+                    size: size, radius: size / 2
                 };
                 
                 do {
@@ -62,10 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 span.style.width = `${size}px`;
                 span.style.height = `${size}px`;
+                // Set initial position before appending to avoid flash at 0,0
+                span.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
                 sloganContainer.appendChild(span);
                 bubbles.push(bubble);
             });
-            animateBubbles();
+            
+            animateBubbles(); // Start animation only after successful creation
         }
         
         function animateBubbles() {
@@ -106,8 +111,21 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             animationFrameId = requestAnimationFrame(animateBubbles);
         }
-
-        window.addEventListener('load', createBubbles);
+        
+        // --- THE DEFINITIVE FIX ---
+        // This function checks if the container is ready and initializes the animation.
+        function tryInitAnimation() {
+            const bounds = sloganContainer.getBoundingClientRect();
+            if (bounds.width > 0 && bounds.height > 0) {
+                createBubbles();
+            } else {
+                // If not ready, wait a bit and try again.
+                setTimeout(tryInitAnimation, 100);
+            }
+        }
+        
+        // Start the process after the entire page is loaded.
+        window.addEventListener('load', tryInitAnimation);
         window.addEventListener('resize', createBubbles); 
     }
 
@@ -119,11 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         window.addEventListener('mousemove', e => {
             moveCounter++;
-            if (moveCounter % 4 === 0) {
+            if (moveCounter % 4 === 0) { 
                 const trail = document.createElement('div');
                 trail.className = 'cursor-trail';
                 trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
                 document.body.appendChild(trail);
+
                 trail.style.left = `${e.clientX}px`;
                 trail.style.top = `${e.clientY}px`;
                 
@@ -207,5 +226,4 @@ document.addEventListener('DOMContentLoaded', () => {
             sendLead(e.target, submitButton);
         });
     });
-
 });
