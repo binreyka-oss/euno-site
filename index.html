@@ -21,9 +21,9 @@
                 <img src="assets/images/logo.png" alt="EUNO Logo">
             </a>
             <nav class="header__nav">
-                <a href="#cases">Кейсы</a>
-                <a href="#services">Услуги</a>
                 <a href="#about">О нас</a>
+                <a href="#process">Процесс</a>
+                <a href="#services">Услуги</a>
                 <a href="#contact">Контакты</a>
             </nav>
             <div class="header__contacts">
@@ -39,82 +39,174 @@
                 <h1>EUNO — брендинговое агентство. Находим уникальную ценность бизнеса и&nbsp;превращаем её в&nbsp;измеримый рост.</h1>
             </div>
         </section>
-
-        <section id="cases" class="cases">
+        
+        <section id="principles" class="principles">
             <div class="container">
-                <h2 class="section-title">Кейсы</h2>
-                <div class="cases-grid">
-                    <a href="#" class="case-card">
-                        <div class="case-card__image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDE2fDEwNjU5NTV8fHx8fDJ8fDE2OTE2NzExMDh8&ixlib=rb-4.0.3&q=80&w=1200" alt="Название проекта 1">
+                <div class="principle-item">
+                    <h3 class="principle-item__title">Data-driven подход</h3>
+                    <p class="principle-item__desc">Каждое решение — от позиционирования до дизайна — мы основываем на анализе данных: рынка, конкурентов и аудитории.</p>
+                </div>
+                <div class="principle-item">
+                    <h3 class="principle-item__title">Измеримые результаты</h3>
+                    <p class="principle-item__desc">Мы не создаем «просто красоту». Наша работа нацелена на конкретные KPI: рост RevPASH, eNPS, снижение отходов.</p>
+                </div>
+                <div class="principle-item">
+                    <h3 class="principle-item__title">Долгосрочное партнерство</h3>
+                    <p class="principle-item__desc">Наша цель — не сдать проект, а стать частью вашей команды, обеспечивая поддержку и рост вашего бренда на годы вперед.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="process">
+            <div class="container">
+                <h2 class="section-title">Наш процесс</h2>
+                <div class="process-interactive">
+                    <div class="process-progress-bar">
+                        <div class="process-progress-bar__fill" id="progressBarFill"></div>
+                    </div>
+                    <div class="process-tabs">
+                        <div class="process-tab active" data-phase="1"><span>01</span> Discovery</div>
+                        <div class="process-tab" data-phase="2"><span>02</span> Strategy</div>
+                        <div class="process-tab" data-phase="3"><span>03</span> Delivery</div>
+                        <div class="process-tab" data-phase="4"><span>04</span> Follow-Up</div>
+                        <div class="process-tab" data-phase="5"><span>05</span> Advocacy</div>
+                    </div>
+                    <div class="process-content-wrapper">
+                        <div class="process-content active" data-phase="1">
+                            <h3>Погружение и исследование</h3>
+                            <p>Фундамент проекта. Проводим стратегический воркшоп, глубинные JTBD-интервью с клиентами, анализируем конкурентов и рынок. Результат — набор подтвержденных инсайтов и гипотез для роста.</p>
                         </div>
-                        <div class="case-card__info">
-                            <h3 class="case-card__title">Название проекта 1</h3>
-                            <p class="case-card__desc">Краткое описание проекта, сфера. HoReCa.</p>
+                        <div class="process-content" data-phase="2">
+                            <h3>Разработка бренд-платформы</h3>
+                            <p>Превращаем инсайты в управляемую систему. Создаем Brand-OS — ядро бренда, включающее архетип, позиционирование, Tone of Voice и пирамиду сообщений. Это ваш стратегический компас.</p>
                         </div>
-                    </a>
-                    <a href="#" class="case-card">
-                        <div class="case-card__image-wrapper">
-                             <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDF8MTA2NTk1NXx8fHx8Mnx8MTY5MTY3MTEwOHw&ixlib=rb-4.0.3&q=80&w=1200" alt="Название проекта 2">
+                        <div class="process-content" data-phase="3">
+                            <h3>Внедрение и запуск</h3>
+                            <p>Воплощаем стратегию в жизнь. Разрабатываем визуальную айдентику, создаем Staff Playbook для обучения команды, настраиваем KPI-дашборд и передаем все мастер-файлы.</p>
                         </div>
-                        <div class="case-card__info">
-                            <h3 class="case-card__title">Название проекта 2</h3>
-                            <p class="case-card__desc">Краткое описание проекта, сфера. Hospitality.</p>
+                        <div class="process-content" data-phase="4">
+                            <h3>Поддержка и анализ</h3>
+                            <p>Готовим детальный Impact-Report с анализом достигнутых KPI. Оцениваем эффективность внедренных решений и даем рекомендации по дальнейшему развитию.</p>
                         </div>
-                    </a>
-                     <a href="#" class="case-card">
-                        <div class="case-card__image-wrapper">
-                             <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDR8MTA2NTk1NXx8fHx8Mnx8MTY5MTY3MTEwOHw&ixlib=rb-4.0.3&q=80&w=1200" alt="Название проекта 3">
+                         <div class="process-content" data-phase="5">
+                            <h3>Партнерство и рост</h3>
+                            <p>Помогаем бренду жить и развиваться. Пишем и публикуем совместный кейс, чтобы усилить ваш бренд на рынке, и переходим в формат постоянной поддержки.</p>
                         </div>
-                        <div class="case-card__info">
-                            <h3 class="case-card__title">Название проекта 3</h3>
-                            <p class="case-card__desc">Краткое описание проекта, сфера. Retail.</p>
-                        </div>
-                    </a>
-                     <a href="#" class="case-card">
-                        <div class="case-card__image-wrapper">
-                            <img src="https://images.unsplash.com/photo-1600880292210-85938c039953?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDEyfDEwNjU5NTV8fHx8fDJ8fDE2OTE2NzExMDh8&ixlib=rb-4.0.3&q=80&w=1200" alt="Название проекта 4">
-                        </div>
-                        <div class="case-card__info">
-                            <h3 class="case-card__title">Название проекта 4</h3>
-                            <p class="case-card__desc">Краткое описание проекта, сфера. Services.</p>
-                        </div>
-                    </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Основные услуги</h2>
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>P1 «Маркет-Снимок»</h3>
+                        <p class="price">79 000 ₽</p>
+                        <p class="note">Определяем вашу точку "А" и находим три главных приоритета для роста.</p>
+                        <ul>
+                            <li>SWOT и PESTEL анализ</li>
+                            <li>Мини-аудит конкурентов</li>
+                            <li>Анализ трендов (Trend Canvas 2.0)</li>
+                            <li>Глубинные интервью с гостями (JTBD)</li>
+                            <li>Аудит сервиса на месте (2 часа)</li>
+                        </ul>
+                        <button class="card-cta" data-open-modal>Заказать аудит</button>
+                    </div>
+                    <div class="card card-optimal">
+                        <div class="card-badge">Оптимальный</div>
+                        <h3>P2 «Бренд-Платформа PRO»</h3>
+                        <p class="price">390 000 ₽</p>
+                        <p class="note">Создаем готовую бренд-систему и дорожную карту для роста RevPASH/NPS.</p>
+                        <ul>
+                            <li>Всё из пакета P1</li>
+                            <li>Полная платформа бренда (Brand-OS)</li>
+                            <li>Позиционирование меню и CX-Blueprint</li>
+                            <li>Мини-гайд по визуалу (лого, цвета, шрифты)</li>
+                            <li>Дорожная карта внедрения на 90 дней</li>
+                        </ul>
+                        <button class="card-cta" data-open-modal>Обсудить проект</button>
+                    </div>
+                    <div class="card card-premium">
+                        <div class="card-badge">Максимальное внедрение</div>
+                        <h3>РЗ «Полная Трансформация»</h3>
+                        <p class="price">650 000 ₽</p>
+                        <p class="note">Перестраиваем бизнес-процессы для гарантированного роста ключевых метрик.</p>
+                         <ul>
+                            <li>Всё из пакета P2</li>
+                            <li>Глубокое обучение персонала (4 модуля)</li>
+                            <li>Инжиниринг меню (Menu-Engineering)</li>
+                            <li>Внедрение KPI-панели управления</li>
+                            <li>3 проверки «Тайный гость»</li>
+                         </ul>
+                        <button class="card-cta" data-open-modal>Стать клиентом</button>
+                    </div>
                 </div>
             </div>
         </section>
         
-        <section id="services" class="services">
+        <section class="subscriptions">
             <div class="container">
-                <h2 class="section-title">Услуги</h2>
-                <div class="service-item">
-                    <h3 class="service-item__title">Бренд-стратегия</h3>
-                    <p class="service-item__desc">Исследуем рынок, аудиторию и ваш бизнес, чтобы найти уникальную ценность и сформулировать платформу бренда: от архетипа и миссии до голоса и ключевых сообщений.</p>
-                    <div class="service-item__price">от 79 000 ₽</div>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-item__title">Айдентика и дизайн</h3>
-                    <p class="service-item__desc">Превращаем стратегию в визуальный язык. Разрабатываем логотип, фирменный стиль, дизайн ключевых носителей и создаем гайдлайны для последовательной коммуникации.</p>
-                    <div class="service-item__price">от 120 000 ₽</div>
-                </div>
-                <div class="service-item">
-                    <h3 class="service-item__title">Внедрение и поддержка</h3>
-                    <p class="service-item__desc">Помогаем бренду жить и работать. Обучаем команды, разрабатываем плейбуки для персонала, настраиваем KPI-дашборды и оказываем поддержку на основе ежемесячной подписки.</p>
-                    <div class="service-item__price">от 24 900 ₽/мес</div>
+                <h2 class="section-title">Постоянная поддержка (подписки)</h2>
+                <div class="cards-grid">
+                      <div class="card">
+                          <h3>S-1 «Пульс»</h3>
+                          <p class="price">24 900 ₽<span>/ мес.</span></p>
+                          <p class="note">Мониторинг ключевых показателей бренда.</p>
+                          <ul>
+                              <li>Доступ к панели (10 KPI)</li>
+                              <li>1-часовой стратегический звонок</li>
+                              <li>Квартальный мини-аудит в PDF</li>
+                          </ul>
+                          <button class="card-cta" data-open-modal>Выбрать «Пульс»</button>
+                      </div>
+                      <div class="card">
+                          <h3>S-2 «Драйв»</h3>
+                          <p class="price">59 900 ₽<span>/ мес.</span></p>
+                          <p class="note">Активная работа над контентом и меню.</p>
+                          <ul>
+                              <li>Всё из S-1</li>
+                              <li>А/В-тест меню (1 позиция/мес.)</li>
+                              <li>Контент-календарь и 16 SMM-постов</li>
+                              <li>Квартальный воркшоп на месте</li>
+                          </ul>
+                          <button class="card-cta" data-open-modal>Выбрать «Драйв»</button>
+                      </div>
+                      <div class="card">
+                          <h3>S-3 «Экспансия»</h3>
+                          <p class="price">119 000 ₽<span>/ мес.</span></p>
+                          <p class="note">Стратегическая поддержка для масштабирования.</p>
+                          <ul>
+                              <li>Всё из S-2</li>
+                              <li>Идея pop-up / dark-kitchen (1/кв.)</li>
+                              <li>Поддержка по созданию Franchise Playbook</li>
+                              <li>Дизайн-поддержка (до 30 ч/мес.)</li>
+                          </ul>
+                          <button class="card-cta" data-open-modal>Выбрать «Экспансию»</button>
+                      </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about">
-            <div class="container about__container">
-                <div class="about__text">
-                    <h2 class="section-title">О нас</h2>
-                    <p>Мы — команда стратегов и дизайнеров. Мы верим, что сильный бренд — это не красивая картинка, а система, которая помогает бизнесу расти, привлекать лучших людей и создавать лояльное сообщество.</p>
-                    <p>Наш подход — это синтез аналитики и креатива (Sage x Creator). Мы не предлагаем шаблонных решений. Каждый проект для нас — это глубокое погружение в бизнес клиента для поиска той самой, настоящей ценности (VALUE).</p>
+        <section id="metrics" class="metrics">
+            <div class="container">
+                <h2 class="section-title">Наши цели — ваши результаты</h2>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-item__value">+5%</div>
+                        <div class="metric-item__desc">Рост RevPASH*</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item__value">+20%</div>
+                        <div class="metric-item__desc">Рост eNPS*</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item__value">-15%</div>
+                        <div class="metric-item__desc">Снижение отходов*</div>
+                    </div>
                 </div>
-                <div class="about__image">
-                     <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNTU2fDB8MXxjb2xsZWN0aW9ufDE3fDEwNjU5NTV8fHx8fDJ8fDE2OTE2NzExMDh8&ixlib=rb-4.0.3&q=80&w=800" alt="Команда EUNO">
-                </div>
+                <p class="metrics-note">*Целевые показатели. Мы определим и гарантируем KPI конкретно для вашего бизнеса.</p>
             </div>
         </section>
 
@@ -123,10 +215,6 @@
                  <h2 class="section-title">Давайте работать вместе</h2>
                  <p class="contact__subtitle">Расскажите о вашей задаче, и мы свяжемся с вами, чтобы назначить первую встречу-знакомство.</p>
                  <a href="mailto:hello@euno.agency" class="contact__email">hello@euno.agency</a>
-                 <div class="contact__socials">
-                     <a href="https://t.me/yourtelegram" target="_blank">Telegram</a>
-                     <a href="https://wa.me/79991234567" target="_blank">WhatsApp</a>
-                 </div>
             </div>
         </section>
     </main>
@@ -134,7 +222,10 @@
     <footer class="footer">
         <div class="container footer__container">
             <p>© EUNO 2025</p>
-            <p>Ты знаешь, что ценно</p>
+            <nav class="footer__nav">
+                <a href="https://t.me/yourtelegram" target="_blank">Telegram</a>
+                <a href="https://wa.me/79991234567" target="_blank">WhatsApp</a>
+            </nav>
             <a href="#top">Наверх</a>
         </div>
     </footer>
