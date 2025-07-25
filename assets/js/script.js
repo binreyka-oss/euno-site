@@ -5,15 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const sloganContainer = document.getElementById('slogans-container');
     if (sloganContainer && window.matchMedia("(min-width: 769px)").matches) {
         const slogans = [
-            "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
-            "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", "ты знаешь где твое преимущество",
-            "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять", "ты знаешь свое влияние", 
-            "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам", "ты знаешь что двигает рынок", 
-            "ты знаешь как выделиться", "ты знаешь, что мотивирует", "ты знаешь, что вдохновляет людей", "ты знаешь как управлять вниманием",
-            "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
+            "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", 
+            "ты знаешь силу бренда", "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", 
+            "ты знаешь где твое преимущество", "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять",
+            "ты знаешь свое влияние", "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам", 
+            "ты знаешь что двигает рынок", "ты знаешь как выделиться", "ты знаешь, что мотивирует", "ты знаешь, что вдохновляет людей", 
+            "ты знаешь как управлять вниманием", "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
             "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия", 
             "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
-            "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше", "ты знаешь, как оставить наследие"
+            "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше"
         ];
         let bubbles = [];
         let animationFrameId;
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bubbles = [];
             sloganContainer.innerHTML = '';
             const bounds = sloganContainer.getBoundingClientRect();
-            if (bounds.width === 0 || bounds.height === 0) return; // Exit if container has no dimensions
+            if (bounds.width === 0 || bounds.height === 0) return;
 
             const headline = document.getElementById('main-headline');
             const deadZoneRect = headline.getBoundingClientRect();
@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 span.className = 'slogan-bubble';
                 span.textContent = sloganText;
                 
-                const size = 120 + Math.random() * 50;
+                const size = 130 + Math.random() * 50;
                 const bubble = {
                     element: span,
                     x: 0,
                     y: 0,
-                    vx: (Math.random() - 0.5) * 0.7,
-                    vy: (Math.random() - 0.5) * 0.7,
+                    vx: (Math.random() - 0.5) * 1.0, // Increased speed
+                    vy: (Math.random() - 0.5) * 1.0, // Increased speed
                     size: size,
                     radius: size / 2
                 };
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sloganContainer.appendChild(span);
                 bubbles.push(bubble);
             });
-            animateBubbles(); // Start animation after creation
+            animateBubbles();
         }
         
         function animateBubbles() {
@@ -107,12 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
             animationFrameId = requestAnimationFrame(animateBubbles);
         }
 
-        // --- THE FIX ---
-        // Wait for the entire window to load, ensuring CSS is applied and dimensions are correct.
         window.addEventListener('load', createBubbles);
         window.addEventListener('resize', createBubbles); 
     }
-
 
     // --- Cursor Trail ---
     const cursorArea = document.querySelector('.custom-cursor-area');
@@ -122,12 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         window.addEventListener('mousemove', e => {
             moveCounter++;
-            if (moveCounter % 4 === 0) { 
+            if (moveCounter % 4 === 0) {
                 const trail = document.createElement('div');
                 trail.className = 'cursor-trail';
                 trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
                 document.body.appendChild(trail);
-
                 trail.style.left = `${e.clientX}px`;
                 trail.style.top = `${e.clientY}px`;
                 
@@ -145,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
 
     // --- Interactive Process Tabs ---
     const tabs = document.querySelectorAll('.process-tab');
