@@ -59,6 +59,18 @@ img { max-width: 100%; height: auto; display: block; }
     border: 1px solid var(--black);
     color: var(--accent-red);
     box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    animation: spawn 0.7s ease-out forwards;
+}
+
+@keyframes spawn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* PRINCIPLES */
