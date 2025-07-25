@@ -2,48 +2,57 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Floating Slogan Bubbles ---
-    const slogans = [
-        "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", 
-        "ты знаешь силу бренда", "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал",
-        "ты знаешь где твое преимущество", "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять",
-        "ты знаешь свое влияние", "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам"
-    ];
     const sloganContainer = document.getElementById('slogans-container');
-    const colors = ['rgba(51, 87, 255, 0.8)', 'rgba(51, 255, 161, 0.8)', 'rgba(229, 29, 69, 0.8)']; // Blue, Green, Red
-    const bubbles = [];
+    if (sloganContainer && window.matchMedia("(min-width: 769px)").matches) {
+        const slogans = [
+            "ты знаешь как вырасти", "важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
+            "как вдохновлять", "смысл изменений", "свой потенциал", "где твое преимущество", "что создает ценность", 
+            "силу команды", "как влиять", "свое влияние", "что цепляет", "как убеждать", "что важно клиентам"
+        ];
+        const colors = ['rgba(51, 87, 255, 0.7)', 'rgba(229, 29, 69, 0.7)'];
+        const bubbles = [];
 
-    if (sloganContainer) {
         const headline = document.getElementById('main-headline');
-        const deadZone = headline.getBoundingClientRect();
+        const deadZoneRect = headline.getBoundingClientRect();
+        const deadZone = {
+            top: deadZoneRect.top - 50,
+            right: deadZoneRect.right + 50,
+            bottom: deadZoneRect.bottom + 50,
+            left: deadZoneRect.left - 50,
+        };
 
         slogans.forEach(sloganText => {
             const span = document.createElement('div');
             span.className = 'slogan-bubble';
             span.textContent = sloganText;
             
+            const size = 120 + Math.random() * 80;
             const bubble = {
                 element: span,
                 x: 0,
                 y: 0,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                size: 150 + Math.random() * 100
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                size: size
             };
             
-            // Set initial position outside the dead zone
             do {
                 bubble.x = Math.random() * sloganContainer.offsetWidth;
                 bubble.y = Math.random() * sloganContainer.offsetHeight;
             } while (
-                bubble.x > deadZone.left - bubble.size &&
+                bubble.x + size > deadZone.left &&
                 bubble.x < deadZone.right &&
-                bubble.y > deadZone.top - bubble.size &&
+                bubble.y + size > deadZone.top &&
                 bubble.y < deadZone.bottom
             );
 
-            span.style.width = `${bubble.size}px`;
+            span.style.width = `${size}px`;
+            span.style.height = `${size}px`;
             span.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            span.style.color = 'white';
+            span.style.color = 'var(--black)';
+            span.style.border = '1px solid var(--black)';
+            span.style.background = 'rgba(255, 255, 255, 0.7)';
+
 
             sloganContainer.appendChild(span);
             bubbles.push(bubble);
@@ -54,13 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 bubble.x += bubble.vx;
                 bubble.y += bubble.vy;
 
-                // Bounce off walls
-                if (bubble.x < 0 || bubble.x > sloganContainer.offsetWidth - bubble.size) {
-                    bubble.vx *= -1;
-                }
-                if (bubble.y < 0 || bubble.y > sloganContainer.offsetHeight - bubble.size) {
-                    bubble.vy *= -1;
-                }
+                if (bubble.x < 0 || bubble.x > sloganContainer.offsetWidth - bubble.size) bubble.vx *= -1;
+                if (bubble.y < 0 || bubble.y > sloganContainer.offsetHeight - bubble.size) bubble.vy *= -1;
 
                 bubble.element.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
             });
@@ -72,29 +76,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Cursor Trail ---
     const cursorArea = document.querySelector('.custom-cursor-area');
-    if (cursorArea) {
+    if (cursorArea && window.matchMedia("(min-width: 769px)").matches) {
         const foodIcons = ['🍎', '🍞', '🥕', '🍇', '🍌', '🍕', '🍔'];
+        let moveCounter = 0;
         
         window.addEventListener('mousemove', e => {
-            const trail = document.createElement('div');
-            trail.className = 'cursor-trail';
-            trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
-            document.body.appendChild(trail);
+            moveCounter++;
+            if (moveCounter % 8 === 0) { // Throttle the effect
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
+                document.body.appendChild(trail);
 
-            trail.style.left = `${e.clientX}px`;
-            trail.style.top = `${e.clientY}px`;
-            
-            const startRotation = Math.random() * 90 - 45;
-            const endRotation = startRotation + Math.random() * 60 - 30;
-            trail.style.transform = `translate(-50%, -50%) rotate(${startRotation}deg) scale(1)`;
+                trail.style.left = `${e.clientX}px`;
+                trail.style.top = `${e.clientY}px`;
+                
+                const startRotation = Math.random() * 90 - 45;
+                const endRotation = startRotation + Math.random() * 60 - 30;
+                trail.style.transform = `translate(-50%, -50%) rotate(${startRotation}deg) scale(1)`;
 
-            setTimeout(() => {
-                trail.style.opacity = '0';
-                trail.style.transform = `translate(-50%, -50%) rotate(${endRotation}deg) scale(0)`;
                 setTimeout(() => {
-                    trail.remove();
-                }, 600);
-            }, 10);
+                    trail.style.opacity = '0';
+                    trail.style.transform = `translate(-50%, -50%) rotate(${endRotation}deg) scale(0)`;
+                    setTimeout(() => {
+                        trail.remove();
+                    }, 1200); // Longer disappearance time
+                }, 100); // Start fading after a short delay
+            }
         });
     }
 
@@ -121,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Modal Logic ---
+    // --- Modal Logic & Form Submission ---
     const modal = document.getElementById('modal');
     if (modal) {
         const openModalButtons = document.querySelectorAll('[data-open-modal]');
@@ -137,8 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.target === modal) modal.style.display = 'none';
         });
     }
-
-    // --- Submit forms -> Telegram ---
+    
     const sendLead = async (form, button) => {
         const formData = Object.fromEntries(new FormData(form).entries());
         if (!formData.consent) {
