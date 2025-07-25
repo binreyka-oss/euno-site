@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "ты знаешь как выделиться", "ты знаешь, что мотивирует", "ты знаешь, что вдохновляет людей", "ты знаешь как управлять вниманием",
             "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
             "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия", 
-            "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу"
+            "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
+            "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше"
         ];
         
         const numColumns = 7;
@@ -20,9 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const column = document.createElement('div');
             column.className = 'slogan-column';
             
+            // Shuffle and slice slogans for variety in each column
             const shuffledSlogans = [...slogans].sort(() => 0.5 - Math.random());
             const columnSlogans = shuffledSlogans.slice(0, 15);
 
+            // Duplicate slogans for infinite scroll effect
             const columnContent = [...columnSlogans, ...columnSlogans];
             
             columnContent.forEach(text => {
