@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
             bubbles = [];
             sloganContainer.innerHTML = '';
             
-            // For a fixed background, we use the window dimensions.
             const bounds = {
                 width: window.innerWidth,
                 height: window.innerHeight
             };
+            if (bounds.width === 0) return;
 
             const headline = document.getElementById('main-headline');
             const deadZoneRect = headline.getBoundingClientRect();
