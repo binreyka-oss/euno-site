@@ -3,7 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Floating Slogan Bubbles ---
     const sloganContainer = document.getElementById('slogans-container');
-    if (sloganContainer && window.matchMedia("(min-width: 769px)").matches) {
+    // THE FIX: We get the heroSection, a stable element, to calculate boundaries from.
+    const heroSection = document.querySelector('.hero');
+
+    if (sloganContainer && heroSection && window.matchMedia("(min-width: 769px)").matches) {
         const slogans = [
             "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
             "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", "ты знаешь где твое преимущество",
@@ -13,10 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
             "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия", 
             "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
-            "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше", "ты знаешь, как оставить наследие",
-            "ты знаешь, что заставляет гордиться", "ты знаешь, как изменить мир", "ты знаешь, где лежит истина",
-            "ты знаешь, как найти путь", "ты знаешь, что движет прогрессом", "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
-            "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал"
+            "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше"
         ];
         let bubbles = [];
         let animationFrameId;
@@ -27,16 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             bubbles = [];
             sloganContainer.innerHTML = '';
-            const bounds = sloganContainer.getBoundingClientRect();
-            if (bounds.width === 0 || bounds.height === 0) return; // Exit if container has no dimensions
+            
+            // THE FIX: We measure heroSection instead of sloganContainer.
+            const bounds = heroSection.getBoundingClientRect();
+            // We still use sloganContainer for its own position relative to the heroSection
+            const containerRect = sloganContainer.getBoundingClientRect();
+            
+            if (bounds.width === 0) return;
 
             const headline = document.getElementById('main-headline');
             const deadZoneRect = headline.getBoundingClientRect();
+            
             const deadZone = {
-                top: deadZoneRect.top - bounds.top - 50,
-                right: deadZoneRect.right - bounds.left + 50,
-                bottom: deadZoneRect.bottom - bounds.top + 50,
-                left: deadZoneRect.left - bounds.left - 50,
+                top: deadZoneRect.top - containerRect.top,
+                right: deadZoneRect.right - containerRect.left,
+                bottom: deadZoneRect.bottom - containerRect.top,
+                left: deadZoneRect.left - containerRect.left,
             };
 
             slogans.forEach(sloganText => {
@@ -46,41 +52,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 const size = 120 + Math.random() * 50;
                 const bubble = {
-                    element: span,
-                    x: 0,
-                    y: 0,
-                    vx: (Math.random() - 0.5) * 0.7,
-                    vy: (Math.random() - 0.5) * 0.7,
-                    size: size,
-                    radius: size / 2
+                    element: span, x: 0, y: 0,
+                    vx: (Math.random() - 0.5) * 1.0,
+                    vy: (Math.random() - 0.5) * 1.0,
+                    size: size, radius: size / 2
                 };
                 
+                // We use the sloganContainer's dimensions for placement, as the bubbles live inside it.
+                // The key is that this function is now called when we know these dimensions are > 0.
+                const containerWidth = sloganContainer.offsetWidth;
+                const containerHeight = sloganContainer.offsetHeight;
+
                 do {
-                    bubble.x = Math.random() * (bounds.width - size);
-                    bubble.y = Math.random() * (bounds.height - size);
+                    bubble.x = Math.random() * (containerWidth - size);
+                    bubble.y = Math.random() * (containerHeight - size);
                 } while (
-                    bubble.x + size > deadZone.left && bubble.x < deadZone.right &&
-                    bubble.y + size > deadZone.top && bubble.y < deadZone.bottom
+                    bubble.x + size > deadZone.left - 50 && bubble.x < deadZone.right + 50 &&
+                    bubble.y + size > deadZone.top - 50 && bubble.y < deadZone.bottom + 50
                 );
 
                 span.style.width = `${size}px`;
                 span.style.height = `${size}px`;
+                span.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
                 sloganContainer.appendChild(span);
                 bubbles.push(bubble);
             });
-            animateBubbles(); // Start animation after creation
+            
+            animateBubbles();
         }
         
         function animateBubbles() {
-            const bounds = sloganContainer.getBoundingClientRect();
+            const containerWidth = sloganContainer.offsetWidth;
+            const containerHeight = sloganContainer.offsetHeight;
+
             bubbles.forEach((bubble, i) => {
                 bubble.x += bubble.vx;
                 bubble.y += bubble.vy;
 
                 if (bubble.x <= 0) { bubble.x = 0; bubble.vx *= -1; }
-                if (bubble.x >= bounds.width - bubble.size) { bubble.x = bounds.width - bubble.size; bubble.vx *= -1; }
+                if (bubble.x >= containerWidth - bubble.size) { bubble.x = containerWidth - bubble.size; bubble.vx *= -1; }
                 if (bubble.y <= 0) { bubble.y = 0; bubble.vy *= -1; }
-                if (bubble.y >= bounds.height - bubble.size) { bubble.y = bounds.height - bubble.size; bubble.vy *= -1; }
+                if (bubble.y >= containerHeight - bubble.size) { bubble.y = containerHeight - bubble.size; bubble.vy *= -1; }
 
                 for (let j = i + 1; j < bubbles.length; j++) {
                     const otherBubble = bubbles[j];
@@ -110,12 +122,20 @@ document.addEventListener('DOMContentLoaded', () => {
             animationFrameId = requestAnimationFrame(animateBubbles);
         }
 
-        // --- THE FIX ---
-        // Wait for the entire window to load, ensuring CSS is applied and dimensions are correct.
-        window.addEventListener('load', createBubbles);
+        // Using ResizeObserver is the most robust way to detect when an element has a size.
+        const observer = new ResizeObserver(entries => {
+            if (entries[0].contentRect.width > 0) {
+                createBubbles();
+                // We only need to run this once on load, so we disconnect the observer.
+                // The resize event listener below will handle window size changes.
+                observer.disconnect();
+            }
+        });
+        
+        // Start observing the reliable parent element.
+        observer.observe(heroSection);
         window.addEventListener('resize', createBubbles); 
     }
-
 
     // --- Cursor Trail ---
     const cursorArea = document.querySelector('.custom-cursor-area');
@@ -148,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
 
     // --- Interactive Process Tabs ---
     const tabs = document.querySelectorAll('.process-tab');
@@ -215,5 +234,4 @@ document.addEventListener('DOMContentLoaded', () => {
             sendLead(e.target, submitButton);
         });
     });
-
 });
