@@ -1,69 +1,100 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Chaotic Slogans on Hero ---
+    // --- Floating Slogan Bubbles ---
     const slogans = [
         "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", 
         "ты знаешь силу бренда", "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал",
         "ты знаешь где твое преимущество", "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять",
-        "ты знаешь свое влияние", "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам",
-        "ты знаешь что двигает рынок", "ты знаешь как выделиться", "ты знаешь, что мотивирует", "ты знаешь, что вдохновляет людей",
-        "ты знаешь как управлять вниманием", "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", 
-        "ты знаешь, как вызвать «вау»", "ты знаешь, что рождает ценность", "ты знаешь, что создает историю",
-        "ты знаешь, где скрыта магия", "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", 
-        "ты знаешь, что берет за душу", "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше", 
-        "ты знаешь, как оставить наследие", "ты знаешь, что заставляет гордиться", "ты знаешь, как изменить мир",
-        "ты знаешь, где лежит истина", "ты знаешь, как найти путь", "ты знаешь, что движет прогрессом"
+        "ты знаешь свое влияние", "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам"
     ];
     const sloganContainer = document.getElementById('slogans-container');
-    const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A1', '#A133FF', '#33FFA1'];
+    const colors = ['rgba(51, 87, 255, 0.8)', 'rgba(51, 255, 161, 0.8)', 'rgba(229, 29, 69, 0.8)']; // Blue, Green, Red
+    const bubbles = [];
 
     if (sloganContainer) {
+        const headline = document.getElementById('main-headline');
+        const deadZone = headline.getBoundingClientRect();
+
         slogans.forEach(sloganText => {
-            const span = document.createElement('span');
-            span.className = 'slogan-item';
+            const span = document.createElement('div');
+            span.className = 'slogan-bubble';
             span.textContent = sloganText;
             
-            // Random position
-            span.style.top = `${Math.random() * 100}%`;
-            span.style.left = `${Math.random() * 100}%`;
+            const bubble = {
+                element: span,
+                x: 0,
+                y: 0,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: 150 + Math.random() * 100
+            };
             
-            // Random color
-            span.style.color = colors[Math.floor(Math.random() * colors.length)];
-            
-            // Random font size
-            span.style.fontSize = `${1 + Math.random() * 1.5}rem`;
+            // Set initial position outside the dead zone
+            do {
+                bubble.x = Math.random() * sloganContainer.offsetWidth;
+                bubble.y = Math.random() * sloganContainer.offsetHeight;
+            } while (
+                bubble.x > deadZone.left - bubble.size &&
+                bubble.x < deadZone.right &&
+                bubble.y > deadZone.top - bubble.size &&
+                bubble.y < deadZone.bottom
+            );
+
+            span.style.width = `${bubble.size}px`;
+            span.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            span.style.color = 'white';
 
             sloganContainer.appendChild(span);
+            bubbles.push(bubble);
         });
+
+        function animateBubbles() {
+            bubbles.forEach(bubble => {
+                bubble.x += bubble.vx;
+                bubble.y += bubble.vy;
+
+                // Bounce off walls
+                if (bubble.x < 0 || bubble.x > sloganContainer.offsetWidth - bubble.size) {
+                    bubble.vx *= -1;
+                }
+                if (bubble.y < 0 || bubble.y > sloganContainer.offsetHeight - bubble.size) {
+                    bubble.vy *= -1;
+                }
+
+                bubble.element.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
+            });
+            requestAnimationFrame(animateBubbles);
+        }
+        animateBubbles();
     }
+
 
     // --- Cursor Trail ---
     const cursorArea = document.querySelector('.custom-cursor-area');
     if (cursorArea) {
-        let trailCount = 0;
-        const maxTrails = 20;
-
+        const foodIcons = ['🍎', '🍞', '🥕', '🍇', '🍌', '🍕', '🍔'];
+        
         window.addEventListener('mousemove', e => {
-            if (trailCount < maxTrails) {
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                document.body.appendChild(trail);
-                trailCount++;
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
+            document.body.appendChild(trail);
 
-                trail.style.left = `${e.clientX}px`;
-                trail.style.top = `${e.clientY}px`;
-                trail.style.background = colors[Math.floor(Math.random() * colors.length)];
-                
+            trail.style.left = `${e.clientX}px`;
+            trail.style.top = `${e.clientY}px`;
+            
+            const startRotation = Math.random() * 90 - 45;
+            const endRotation = startRotation + Math.random() * 60 - 30;
+            trail.style.transform = `translate(-50%, -50%) rotate(${startRotation}deg) scale(1)`;
+
+            setTimeout(() => {
+                trail.style.opacity = '0';
+                trail.style.transform = `translate(-50%, -50%) rotate(${endRotation}deg) scale(0)`;
                 setTimeout(() => {
-                    trail.style.opacity = '0';
-                    trail.style.transform = 'translate(-50%, -50%) scale(0.5)';
-                    setTimeout(() => {
-                        trail.remove();
-                        trailCount--;
-                    }, 500);
-                }, 100);
-            }
+                    trail.remove();
+                }, 600);
+            }, 10);
         });
     }
 
