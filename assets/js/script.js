@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 columnContent += `<span>${slogans[(i * 3 + j) % slogans.length]}</span>`;
             }
             
-            // Дублируем контент для бесшовной прокрутки
             contentWrapper.innerHTML = columnContent + columnContent;
             column.appendChild(contentWrapper);
             wallContainer.appendChild(column);
