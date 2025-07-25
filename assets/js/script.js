@@ -1,63 +1,154 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- "Живая Стена Ценностей" ---
-    const wallContainer = document.getElementById('slogans-wall');
-    if (wallContainer && window.matchMedia("(min-width: 769px)").matches) {
+    // --- Floating Slogan Bubbles ---
+    const sloganContainer = document.getElementById('slogans-container');
+    if (sloganContainer && window.matchMedia("(min-width: 769px)").matches) {
         const slogans = [
-            "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда",
+            "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
             "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", "ты знаешь где твое преимущество",
-            "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять", "ты знаешь свое влияние",
-            "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам", "ты знаешь что двигает рынок",
+            "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять", "ты знаешь свое влияние", 
+            "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам", "ты знаешь что двигает рынок", 
             "ты знаешь как выделиться", "ты знаешь, что мотивирует", "ты знаешь, что вдохновляет людей", "ты знаешь как управлять вниманием",
-            "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»",
-            "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия",
+            "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
+            "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия", 
             "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
             "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше", "ты знаешь, как оставить наследие",
             "ты знаешь, что заставляет гордиться", "ты знаешь, как изменить мир", "ты знаешь, где лежит истина",
+            "ты знаешь, как найти путь", "ты знаешь, что движет прогрессом", "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
+            "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал"
         ];
-        
-        const numColumns = 6;
-        const slogansPerColumn = slogans.length; 
+        let bubbles = [];
+        let animationFrameId;
 
-        for (let i = 0; i < numColumns; i++) {
-            const column = document.createElement('div');
-            column.className = 'slogan-column';
-            column.classList.add(i % 2 === 0 ? 'scroll-up' : 'scroll-down');
-            
-            const contentWrapper = document.createElement('div');
-            
-            let columnContent = '';
-            for (let j = 0; j < slogansPerColumn; j++) {
-                columnContent += `<span>${slogans[(i * 3 + j) % slogans.length]}</span>`;
+        function createBubbles() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
             }
-            
-            contentWrapper.innerHTML = columnContent + columnContent;
-            column.appendChild(contentWrapper);
-            wallContainer.appendChild(column);
-        }
-    }
-    
-    // --- Mobile Menu Logic ---
-    const burger = document.querySelector('.header__burger');
-    const mobileNav = document.querySelector('.mobile-nav');
-    const body = document.querySelector('body');
+            bubbles = [];
+            sloganContainer.innerHTML = '';
+            const bounds = sloganContainer.getBoundingClientRect();
+            if (bounds.width === 0 || bounds.height === 0) return; // Exit if container has no dimensions
 
-    if (burger && mobileNav) {
-        burger.addEventListener('click', () => {
-            burger.classList.toggle('active');
-            mobileNav.classList.toggle('open');
-            body.classList.toggle('no-scroll');
-        });
-        
-        mobileNav.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                burger.classList.remove('active');
-                mobileNav.classList.remove('open');
-                body.classList.remove('no-scroll');
+            const headline = document.getElementById('main-headline');
+            const deadZoneRect = headline.getBoundingClientRect();
+            const deadZone = {
+                top: deadZoneRect.top - bounds.top - 50,
+                right: deadZoneRect.right - bounds.left + 50,
+                bottom: deadZoneRect.bottom - bounds.top + 50,
+                left: deadZoneRect.left - bounds.left - 50,
+            };
+
+            slogans.forEach(sloganText => {
+                const span = document.createElement('div');
+                span.className = 'slogan-bubble';
+                span.textContent = sloganText;
+                
+                const size = 120 + Math.random() * 50;
+                const bubble = {
+                    element: span,
+                    x: 0,
+                    y: 0,
+                    vx: (Math.random() - 0.5) * 0.7,
+                    vy: (Math.random() - 0.5) * 0.7,
+                    size: size,
+                    radius: size / 2
+                };
+                
+                do {
+                    bubble.x = Math.random() * (bounds.width - size);
+                    bubble.y = Math.random() * (bounds.height - size);
+                } while (
+                    bubble.x + size > deadZone.left && bubble.x < deadZone.right &&
+                    bubble.y + size > deadZone.top && bubble.y < deadZone.bottom
+                );
+
+                span.style.width = `${size}px`;
+                span.style.height = `${size}px`;
+                sloganContainer.appendChild(span);
+                bubbles.push(bubble);
             });
+            animateBubbles(); // Start animation after creation
+        }
+        
+        function animateBubbles() {
+            const bounds = sloganContainer.getBoundingClientRect();
+            bubbles.forEach((bubble, i) => {
+                bubble.x += bubble.vx;
+                bubble.y += bubble.vy;
+
+                if (bubble.x <= 0) { bubble.x = 0; bubble.vx *= -1; }
+                if (bubble.x >= bounds.width - bubble.size) { bubble.x = bounds.width - bubble.size; bubble.vx *= -1; }
+                if (bubble.y <= 0) { bubble.y = 0; bubble.vy *= -1; }
+                if (bubble.y >= bounds.height - bubble.size) { bubble.y = bounds.height - bubble.size; bubble.vy *= -1; }
+
+                for (let j = i + 1; j < bubbles.length; j++) {
+                    const otherBubble = bubbles[j];
+                    const dx = (otherBubble.x + otherBubble.radius) - (bubble.x + bubble.radius);
+                    const dy = (otherBubble.y + otherBubble.radius) - (bubble.y + bubble.radius);
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const minDistance = bubble.radius + otherBubble.radius;
+
+                    if (distance < minDistance) {
+                        const angle = Math.atan2(dy, dx);
+                        const overlap = (minDistance - distance) / 2;
+                        bubble.x -= overlap * Math.cos(angle);
+                        bubble.y -= overlap * Math.sin(angle);
+                        otherBubble.x += overlap * Math.cos(angle);
+                        otherBubble.y += overlap * Math.sin(angle);
+                        
+                        const tempVx = bubble.vx;
+                        const tempVy = bubble.vy;
+                        bubble.vx = otherBubble.vx;
+                        bubble.vy = otherBubble.vy;
+                        otherBubble.vx = tempVx;
+                        otherBubble.vy = tempVy;
+                    }
+                }
+                bubble.element.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
+            });
+            animationFrameId = requestAnimationFrame(animateBubbles);
+        }
+
+        // --- THE FIX ---
+        // Wait for the entire window to load, ensuring CSS is applied and dimensions are correct.
+        window.addEventListener('load', createBubbles);
+        window.addEventListener('resize', createBubbles); 
+    }
+
+
+    // --- Cursor Trail ---
+    const cursorArea = document.querySelector('.custom-cursor-area');
+    if (cursorArea && window.matchMedia("(min-width: 769px)").matches) {
+        const foodIcons = ['🍎', '🍞', '🥕', '🍇', '🍌', '🍕', '🍔', '🍣', '🌭', '🌮', '🍟', '🍲', '🦐', '🍩', '🍰', '🥗', '🥪', '🥞'];
+        let moveCounter = 0;
+        
+        window.addEventListener('mousemove', e => {
+            moveCounter++;
+            if (moveCounter % 4 === 0) { 
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
+                document.body.appendChild(trail);
+
+                trail.style.left = `${e.clientX}px`;
+                trail.style.top = `${e.clientY}px`;
+                
+                const startRotation = Math.random() * 90 - 45;
+                const endRotation = startRotation + Math.random() * 60 - 30;
+                trail.style.transform = `translate(-50%, -50%) rotate(${startRotation}deg) scale(1)`;
+
+                setTimeout(() => {
+                    trail.style.opacity = '0';
+                    trail.style.transform = `translate(-50%, -50%) rotate(${endRotation}deg) scale(0)`;
+                    setTimeout(() => {
+                        trail.remove();
+                    }, 1200);
+                }, 100); 
+            }
         });
     }
+
 
     // --- Interactive Process Tabs ---
     const tabs = document.querySelectorAll('.process-tab');
@@ -105,13 +196,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (res.ok) {
                 alert('Спасибо! Мы скоро свяжемся с вами.');
                 form.reset();
-                if (modal && modal.style.display === 'flex') modal.style.display = 'none';
+                if (modal) modal.style.display = 'none';
             } else {
                 alert('Ошибка отправки. Попробуйте снова позже.');
             }
         } catch (err) {
-            console.error('Ошибка отправки формы:', err);
-            alert('Произошла ошибка сети. Пожалуйста, проверьте ваше подключение или попробуйте позже.');
+            alert('Произошла ошибка сети.');
         } finally {
             button.disabled = false;
             button.textContent = originalButtonText;
