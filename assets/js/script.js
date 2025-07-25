@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function createBubbles() {
             bubbles = [];
-            sloganContainer.innerHTML = ''; // Clear existing bubbles
+            sloganContainer.innerHTML = '';
             bounds = sloganContainer.getBoundingClientRect();
             const headline = document.getElementById('main-headline');
             const deadZoneRect = headline.getBoundingClientRect();
@@ -39,13 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 span.className = 'slogan-bubble';
                 span.textContent = sloganText;
                 
-                const size = 110 + Math.random() * 60; // Adjusted size
+                const size = 120 + Math.random() * 50;
                 const bubble = {
                     element: span,
                     x: 0,
                     y: 0,
-                    vx: (Math.random() - 0.5) * 0.7, // Faster speed
-                    vy: (Math.random() - 0.5) * 0.7, // Faster speed
+                    vx: (Math.random() - 0.5) * 0.7, // Increased speed
+                    vy: (Math.random() - 0.5) * 0.7, // Increased speed
                     size: size,
                     radius: size / 2
                 };
@@ -85,17 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const minDistance = bubble.radius + otherBubble.radius;
 
                     if (distance < minDistance) {
-                        const angle = Math.atan2(dy, dx);
-                        const overlap = minDistance - distance;
-
                         // Resolve overlap
-                        const resolveX = (overlap / 2) * Math.cos(angle);
-                        const resolveY = (overlap / 2) * Math.sin(angle);
-                        
-                        bubble.x -= resolveX;
-                        bubble.y -= resolveY;
-                        otherBubble.x += resolveX;
-                        otherBubble.y += resolveY;
+                        const angle = Math.atan2(dy, dx);
+                        const overlap = (minDistance - distance) / 2;
+                        bubble.x -= overlap * Math.cos(angle);
+                        bubble.y -= overlap * Math.sin(angle);
+                        otherBubble.x += overlap * Math.cos(angle);
+                        otherBubble.y += overlap * Math.sin(angle);
                         
                         // Elastic collision response
                         const tempVx = bubble.vx;
@@ -111,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(animateBubbles);
         }
 
-        createBubbles();
-        window.addEventListener('resize', createBubbles); // Recreate bubbles on resize for responsiveness
+        setTimeout(createBubbles, 100); // Initial creation with a small delay
+        window.addEventListener('resize', createBubbles); 
     }
 
 
@@ -124,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         window.addEventListener('mousemove', e => {
             moveCounter++;
-            if (moveCounter % 4 === 0) { // Middle-ground frequency
+            if (moveCounter % 4 === 0) { // Adjusted frequency
                 const trail = document.createElement('div');
                 trail.className = 'cursor-trail';
                 trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
@@ -142,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     trail.style.transform = `translate(-50%, -50%) rotate(${endRotation}deg) scale(0)`;
                     setTimeout(() => {
                         trail.remove();
-                    }, 1200); // Longer disappearance time
+                    }, 1200); 
                 }, 100); 
             }
         });
