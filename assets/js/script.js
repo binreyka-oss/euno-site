@@ -1,120 +1,29 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Floating Slogan Bubbles ---
-    const sloganContainer = document.getElementById('slogans-container');
-    if (sloganContainer && window.matchMedia("(min-width: 769px)").matches) {
-        const slogans = [
-            "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
-            "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", "ты знаешь где твое преимущество",
-            "ты знаешь, что создает ценность", "ты знаешь силу команды", "ты знаешь как влиять", "ты знаешь свое влияние", 
-            "ты знаешь что цепляет", "ты знаешь как убеждать", "ты знаешь что важно клиентам", "ты знаешь что двигает рынок", 
-            "ты знаешь как выделиться", "ты знаешь, что мотивирует", "ты знаешь, что вдохновляет людей", "ты знаешь как управлять вниманием",
-            "ты знаешь, что рождает доверие", "ты знаешь, что делает бренд живым", "ты знаешь, как вызвать «вау»", 
-            "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия", 
-            "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
-            "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше", "ты знаешь, как оставить наследие"
-        ];
-        let bubbles = [];
-        let animationFrameId;
-
-        function createBubbles() {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
+    // --- FADE-IN ON SCROLL ---
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px"
+    };
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+                return;
+            } else {
+                entry.target.classList.add('visible');
+                appearOnScroll.unobserve(entry.target);
             }
-            bubbles = [];
-            sloganContainer.innerHTML = '';
-            const bounds = sloganContainer.getBoundingClientRect();
-            if (bounds.width === 0 || bounds.height === 0) return; // Exit if container has no dimensions
+        });
+    }, appearOptions);
 
-            const headline = document.getElementById('main-headline');
-            const deadZoneRect = headline.getBoundingClientRect();
-            const deadZone = {
-                top: deadZoneRect.top - bounds.top - 50,
-                right: deadZoneRect.right - bounds.left + 50,
-                bottom: deadZoneRect.bottom - bounds.top + 50,
-                left: deadZoneRect.left - bounds.left - 50,
-            };
-
-            slogans.forEach(sloganText => {
-                const span = document.createElement('div');
-                span.className = 'slogan-bubble';
-                span.textContent = sloganText;
-                
-                const size = 120 + Math.random() * 50;
-                const bubble = {
-                    element: span,
-                    x: 0,
-                    y: 0,
-                    vx: (Math.random() - 0.5) * 0.7,
-                    vy: (Math.random() - 0.5) * 0.7,
-                    size: size,
-                    radius: size / 2
-                };
-                
-                do {
-                    bubble.x = Math.random() * (bounds.width - size);
-                    bubble.y = Math.random() * (bounds.height - size);
-                } while (
-                    bubble.x + size > deadZone.left && bubble.x < deadZone.right &&
-                    bubble.y + size > deadZone.top && bubble.y < deadZone.bottom
-                );
-
-                span.style.width = `${size}px`;
-                span.style.height = `${size}px`;
-                sloganContainer.appendChild(span);
-                bubbles.push(bubble);
-            });
-            animateBubbles(); // Start animation after creation
-        }
-        
-        function animateBubbles() {
-            const bounds = sloganContainer.getBoundingClientRect();
-            bubbles.forEach((bubble, i) => {
-                bubble.x += bubble.vx;
-                bubble.y += bubble.vy;
-
-                if (bubble.x <= 0) { bubble.x = 0; bubble.vx *= -1; }
-                if (bubble.x >= bounds.width - bubble.size) { bubble.x = bounds.width - bubble.size; bubble.vx *= -1; }
-                if (bubble.y <= 0) { bubble.y = 0; bubble.vy *= -1; }
-                if (bubble.y >= bounds.height - bubble.size) { bubble.y = bounds.height - bubble.size; bubble.vy *= -1; }
-
-                for (let j = i + 1; j < bubbles.length; j++) {
-                    const otherBubble = bubbles[j];
-                    const dx = (otherBubble.x + otherBubble.radius) - (bubble.x + bubble.radius);
-                    const dy = (otherBubble.y + otherBubble.radius) - (bubble.y + bubble.radius);
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const minDistance = bubble.radius + otherBubble.radius;
-
-                    if (distance < minDistance) {
-                        const angle = Math.atan2(dy, dx);
-                        const overlap = (minDistance - distance) / 2;
-                        bubble.x -= overlap * Math.cos(angle);
-                        bubble.y -= overlap * Math.sin(angle);
-                        otherBubble.x += overlap * Math.cos(angle);
-                        otherBubble.y += overlap * Math.sin(angle);
-                        
-                        const tempVx = bubble.vx;
-                        const tempVy = bubble.vy;
-                        bubble.vx = otherBubble.vx;
-                        bubble.vy = otherBubble.vy;
-                        otherBubble.vx = tempVx;
-                        otherBubble.vy = tempVy;
-                    }
-                }
-                bubble.element.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
-            });
-            animationFrameId = requestAnimationFrame(animateBubbles);
-        }
-
-        // --- THE FIX ---
-        // Wait for the entire window to load, ensuring CSS is applied and dimensions are correct.
-        window.addEventListener('load', createBubbles);
-        window.addEventListener('resize', createBubbles); 
-    }
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
 
 
-    // --- Cursor Trail ---
+    // --- CURSOR TRAIL (from previous version) ---
     const cursorArea = document.querySelector('.custom-cursor-area');
     if (cursorArea && window.matchMedia("(min-width: 769px)").matches) {
         const foodIcons = ['🍎', '🍞', '🥕', '🍇', '🍌', '🍕', '🍔', '🍣', '🌭', '🌮', '🍟', '🍲', '🦐', '🍩', '🍰', '🥗', '🥪', '🥞'];
@@ -146,8 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // --- Interactive Process Tabs ---
+    // --- INTERACTIVE PROCESS TABS ---
     const tabs = document.querySelectorAll('.process-tab');
     const contents = document.querySelectorAll('.process-content');
     const progressBarFill = document.getElementById('progressBarFill');
@@ -165,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Modal Logic & Form Submission ---
+    // --- MODAL LOGIC & FORM SUBMISSION ---
     const modal = document.getElementById('modal');
     if (modal) {
         const openModalButtons = document.querySelectorAll('[data-open-modal]');
@@ -212,5 +120,4 @@ document.addEventListener('DOMContentLoaded', () => {
             sendLead(e.target, submitButton);
         });
     });
-
 });
