@@ -3,8 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Floating Slogan Bubbles ---
     const sloganContainer = document.getElementById('slogans-container');
-    // THE FIX: We get the heroSection, a stable element, to calculate boundaries from.
-    const heroSection = document.querySelector('.hero');
+    const heroSection = document.querySelector('.hero'); // Use the hero section as the reliable element for bounds.
 
     if (sloganContainer && heroSection && window.matchMedia("(min-width: 769px)").matches) {
         const slogans = [
@@ -28,9 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             bubbles = [];
             sloganContainer.innerHTML = '';
             
-            // THE FIX: We measure heroSection instead of sloganContainer.
             const bounds = heroSection.getBoundingClientRect();
-            // We still use sloganContainer for its own position relative to the heroSection
             const containerRect = sloganContainer.getBoundingClientRect();
             
             if (bounds.width === 0) return;
@@ -58,8 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     size: size, radius: size / 2
                 };
                 
-                // We use the sloganContainer's dimensions for placement, as the bubbles live inside it.
-                // The key is that this function is now called when we know these dimensions are > 0.
                 const containerWidth = sloganContainer.offsetWidth;
                 const containerHeight = sloganContainer.offsetHeight;
 
@@ -122,17 +117,16 @@ document.addEventListener('DOMContentLoaded', () => {
             animationFrameId = requestAnimationFrame(animateBubbles);
         }
 
-        // Using ResizeObserver is the most robust way to detect when an element has a size.
+        // The most robust way to initialize layout-dependent scripts.
         const observer = new ResizeObserver(entries => {
+            // This will fire once the element has a non-zero size.
             if (entries[0].contentRect.width > 0) {
                 createBubbles();
-                // We only need to run this once on load, so we disconnect the observer.
-                // The resize event listener below will handle window size changes.
+                // We only need it for the initial setup, the resize listener will handle changes.
                 observer.disconnect();
             }
         });
         
-        // Start observing the reliable parent element.
         observer.observe(heroSection);
         window.addEventListener('resize', createBubbles); 
     }
@@ -150,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 trail.className = 'cursor-trail';
                 trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
                 document.body.appendChild(trail);
-
                 trail.style.left = `${e.clientX}px`;
                 trail.style.top = `${e.clientY}px`;
                 
