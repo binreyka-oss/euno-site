@@ -19,12 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
             "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал"
         ];
         let bubbles = [];
-        let bounds = sloganContainer.getBoundingClientRect();
+        let animationFrameId;
 
         function createBubbles() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
             bubbles = [];
             sloganContainer.innerHTML = '';
-            bounds = sloganContainer.getBoundingClientRect();
+            const bounds = sloganContainer.getBoundingClientRect();
+            if (bounds.width === 0 || bounds.height === 0) return; // Exit if container has no dimensions
+
             const headline = document.getElementById('main-headline');
             const deadZoneRect = headline.getBoundingClientRect();
             const deadZone = {
@@ -44,8 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     element: span,
                     x: 0,
                     y: 0,
-                    vx: (Math.random() - 0.5) * 0.7, // Increased speed
-                    vy: (Math.random() - 0.5) * 0.7, // Increased speed
+                    vx: (Math.random() - 0.5) * 0.7,
+                    vy: (Math.random() - 0.5) * 0.7,
                     size: size,
                     radius: size / 2
                 };
@@ -63,20 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 sloganContainer.appendChild(span);
                 bubbles.push(bubble);
             });
+            animateBubbles(); // Start animation after creation
         }
         
         function animateBubbles() {
+            const bounds = sloganContainer.getBoundingClientRect();
             bubbles.forEach((bubble, i) => {
                 bubble.x += bubble.vx;
                 bubble.y += bubble.vy;
 
-                // Wall collision
                 if (bubble.x <= 0) { bubble.x = 0; bubble.vx *= -1; }
                 if (bubble.x >= bounds.width - bubble.size) { bubble.x = bounds.width - bubble.size; bubble.vx *= -1; }
                 if (bubble.y <= 0) { bubble.y = 0; bubble.vy *= -1; }
                 if (bubble.y >= bounds.height - bubble.size) { bubble.y = bounds.height - bubble.size; bubble.vy *= -1; }
 
-                // Bubble-to-bubble collision
                 for (let j = i + 1; j < bubbles.length; j++) {
                     const otherBubble = bubbles[j];
                     const dx = (otherBubble.x + otherBubble.radius) - (bubble.x + bubble.radius);
@@ -85,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const minDistance = bubble.radius + otherBubble.radius;
 
                     if (distance < minDistance) {
-                        // Resolve overlap
                         const angle = Math.atan2(dy, dx);
                         const overlap = (minDistance - distance) / 2;
                         bubble.x -= overlap * Math.cos(angle);
@@ -93,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         otherBubble.x += overlap * Math.cos(angle);
                         otherBubble.y += overlap * Math.sin(angle);
                         
-                        // Elastic collision response
                         const tempVx = bubble.vx;
                         const tempVy = bubble.vy;
                         bubble.vx = otherBubble.vx;
@@ -104,10 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 bubble.element.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
             });
-            requestAnimationFrame(animateBubbles);
+            animationFrameId = requestAnimationFrame(animateBubbles);
         }
 
-        setTimeout(createBubbles, 100); // Initial creation with a small delay
+        // --- THE FIX ---
+        // Wait for the entire window to load, ensuring CSS is applied and dimensions are correct.
+        window.addEventListener('load', createBubbles);
         window.addEventListener('resize', createBubbles); 
     }
 
@@ -120,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         window.addEventListener('mousemove', e => {
             moveCounter++;
-            if (moveCounter % 4 === 0) { // Adjusted frequency
+            if (moveCounter % 4 === 0) { 
                 const trail = document.createElement('div');
                 trail.className = 'cursor-trail';
                 trail.innerHTML = foodIcons[Math.floor(Math.random() * foodIcons.length)];
@@ -138,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     trail.style.transform = `translate(-50%, -50%) rotate(${endRotation}deg) scale(0)`;
                     setTimeout(() => {
                         trail.remove();
-                    }, 1200); 
+                    }, 1200);
                 }, 100); 
             }
         });
