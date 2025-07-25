@@ -64,6 +64,9 @@ img { max-width: 100%; height: auto; display: block; }
 .about__text p { margin-bottom: 20px; font-size: 1.1rem; max-width: 500px; }
 .about__image img { width: 100%; }
 
+
+/* PRINCIPLES (DELETED to avoid redundancy with About) */
+
 /* PROCESS */
 .process { padding: 120px 0; background: var(--light-gray); }
 .process-interactive { max-width: 1000px; margin: 0 auto; }
@@ -133,6 +136,7 @@ img { max-width: 100%; height: auto; display: block; }
 .contact__form .cta-btn { background: var(--accent-red); color: var(--white); border: none; padding: 14px 22px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: background .3s ease; }
 .contact__form .cta-btn:hover { background: #c41235; }
 
+
 /* FOOTER */
 .footer { padding: 30px 0; border-top: 1px solid var(--border-color); background: var(--white); }
 .footer__container { display: flex; justify-content: space-between; align-items: center; }
@@ -171,6 +175,7 @@ img { max-width: 100%; height: auto; display: block; }
     margin-top: 20px;
 }
 
+
 /* RESPONSIVE */
 @media(max-width: 768px) {
     .header__nav, .header__actions { display: none; }
@@ -203,7 +208,7 @@ img { max-width: 100%; height: auto; display: block; }
     .about__container { grid-template-columns: 1fr; }
     .about__image { grid-row: 1; }
     .about__text .section-title { text-align: center; }
-    .cards-grid, .metrics-grid, .contact__container { grid-template-columns: 1fr; }
+    .principles .container, .cards-grid, .metrics-grid, .contact__container { grid-template-columns: 1fr; }
     .contact__info .section-title { text-align: center; }
     .contact__info { text-align: center; }
     .contact__links { align-items: center; }
