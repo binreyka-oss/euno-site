@@ -53,21 +53,52 @@ img { max-width: 100%; height: auto; display: block; }
 .header__cta:hover { background: #c41235; color: var(--white); }
 .burger-menu { display: none; }
 
-/* HERO & SLOGAN TICKER */
-.hero { min-height: 90vh; display: flex; align-items: center; text-align: center; position: relative; overflow: hidden; }
-.hero__container { position: relative; width: 100%; }
-.hero h1 { font-family: var(--font-headings); font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.3; max-width: 1000px; font-weight: 400; margin: 0 auto; position: relative; z-index: 2; }
-.hero__slogans-bg { position: absolute; inset: -5%; z-index: 1; user-select: none; display: flex; gap: 2vw; }
-.slogan-column { display: flex; flex-direction: column; flex-shrink: 0; min-width: 250px; }
-.slogan-column span { display: block; font-family: var(--font-headings); font-size: 1.5rem; line-height: 1.8; opacity: 0.6; white-space: nowrap; transition: opacity 0.3s ease; }
-.slogan-column:hover { animation-play-state: paused; }
-.slogan-column:hover span { opacity: 1; }
-.slogan-column:nth-child(odd) { animation: scrollUp 40s linear infinite; }
-.slogan-column:nth-child(even) { animation: scrollDown 40s linear infinite; }
-@keyframes scrollUp { from { transform: translateY(0); } to { transform: translateY(-50%); } }
-@keyframes scrollDown { from { transform: translateY(-50%); } to { transform: translateY(0); } }
+/* ИЗМЕНЕНИЕ: Стили для бегущей строки заменены на стили для кругов (пузырей) */
+/* HERO & SLOGAN BUBBLES */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    /* overflow: hidden; убрано, чтобы круги не обрезались */
+}
+.hero__container {
+    position: relative;
+    width: 100%;
+}
+.hero h1 {
+    position: relative;
+    z-index: 2;
+}
+.hero__slogans-bg {
+    position: absolute;
+    inset: -150px;
+    z-index: 1;
+    user-select: none;
+    pointer-events: none;
+}
+.slogan-bubble {
+    position: absolute;
+    font-family: var(--font-headings);
+    font-weight: 500;
+    font-size: 0.8rem;
+    padding: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1.4;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.75);
+    border: 1px solid var(--border-color); /* Используем --border-color вместо --black для мягкости */
+    color: var(--black); /* Используем --black вместо --accent-red для соответствия стилю */
+    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+}
 
-/* ИЗМЕНЕНИЕ: Стили для блока "Трансформация" удалены и заменены стилями для "Принципов" */
+
+/* PRINCIPLES BLOCK */
 .principles {
     padding: 120px 0;
 }
@@ -78,7 +109,7 @@ img { max-width: 100%; height: auto; display: block; }
     background-color: var(--border-color);
     border: 1px solid var(--border-color);
     border-radius: 10px;
-    overflow: hidden; /* Для скругления углов */
+    overflow: hidden;
 }
 .principle-item {
     background-color: var(--white);
@@ -283,15 +314,12 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* RESPONSIVE */
 @media(max-width: 1024px) {
-    .cards-grid {
+    .cards-grid, .principles-grid {
         grid-template-columns: 1fr;
     }
     .card {
         max-width: 600px;
         margin: 0 auto;
-    }
-    .principles-grid {
-        grid-template-columns: 1fr;
     }
 }
 
@@ -314,7 +342,6 @@ img { max-width: 100%; height: auto; display: block; }
     .burger-menu.active span:nth-child(2) { opacity: 0; transform: translateX(20px); }
     .burger-menu.active span:nth-child(3) { transform: rotate(-45deg); }
     
-    .slogan-column span { font-size: 1.2rem; }
     .about__container, .contact__container { grid-template-columns: 1fr; }
     .about__text .section-title, .contact__info .section-title { text-align: center; }
     .contact__info { text-align: center; }
