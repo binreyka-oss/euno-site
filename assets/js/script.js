@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 for (let j = i + 1; j < bubbles.length; j++) {
                     const otherBubble = bubbles[j];
                     const dx = (otherBubble.x + otherBubble.radius) - (bubble.x + bubble.radius);
-                    const dy = (otherBubble.y + otherBubble.radius) - (bubble.y + bubble.radius);
+                    const dy = (otherBubble.y + otherBubble.radius) - (bubble.y + otherBubble.radius);
                     const distance = Math.sqrt(dx * dx + dy * dy);
                     const minDistance = bubble.radius + otherBubble.radius;
 
