@@ -15,10 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
             "ты знаешь, что рождает ценность", "ты знаешь, что создает историю", "ты знаешь, где скрыта магия", 
             "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
             "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше", "ты знаешь, как найти суть",
-            "ты знаешь цену момента", "ты знаешь, как удивить", "ты знаешь свой стиль", "ты знаешь, как быть первым",
-            "ты знаешь, как создавать тренды", "ты знаешь, что такое забота", "ты знаешь, как быть смелым", "ты знаешь, как быть честным",
-            "ты знаешь, как достигать цели"
-        ].slice(0, 43); 
+            "ты знаешь цену момента"
+        ]; 
         const capitalizedSlogans = slogans.map(s => s.charAt(0).toUpperCase() + s.slice(1));
         
         let bubbles = [];
@@ -54,8 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 const size = 120 + Math.random() * 50;
                 const bubble = {
                     element: span, x: 0, y: 0,
-                    vx: (Math.random() - 0.5) * 2.0,
-                    vy: (Math.random() - 0.5) * 2.0,
+                    // ИЗМЕНЕНИЕ: Скорость замедлена в 1.5 раза (2.0 / 1.5 = 1.33)
+                    vx: (Math.random() - 0.5) * 1.33,
+                    vy: (Math.random() - 0.5) * 1.33,
                     size: size, radius: size / 2
                 };
                 
@@ -132,19 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', createBubbles); 
     }
 
-    // --- Headline Backdrop Blur Effect ---
-    const headline = document.getElementById('main-headline');
-    if (headline) {
-        const text = headline.innerText;
-        const wrappedText = text.split('').map(char => {
-            if (char.trim() === '') {
-                return ' '; 
-            }
-            return `<span class="letter-wrap">${char}</span>`;
-        }).join('');
-        headline.innerHTML = wrappedText;
-    }
-
+    // ИЗМЕНЕНИЕ: Скрипт для "обертывания" букв удален
 
     // --- Emoji Cursor Trail ---
     const foodEmojis = ['🍕', '🍔', '🍟', '🍣', '🍩', '🍦', '🍪', '🥑', '🌮', '🍓', '🍉', '🍇', '🍎', '🥕', '🥦', '☕️', '🍹', '🍺', '🍷', '🍰', '🍿', '🥐'];
