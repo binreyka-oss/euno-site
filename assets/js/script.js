@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sloganContainer = document.getElementById('slogans-container');
     const heroSection = document.querySelector('.hero');
     if (sloganContainer && heroSection && window.matchMedia("(min-width: 769px)").matches) {
-        // ИЗМЕНЕНИЕ: Количество слоганов уменьшено ~на 30% (до 43)
         const slogans = [
             "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
             "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", "ты знаешь где твое преимущество",
@@ -19,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "ты знаешь цену момента", "ты знаешь, как удивить", "ты знаешь свой стиль", "ты знаешь, как быть первым",
             "ты знаешь, как создавать тренды", "ты знаешь, что такое забота", "ты знаешь, как быть смелым", "ты знаешь, как быть честным",
             "ты знаешь, как достигать цели"
-        ];
+        ].slice(0, 43); 
         const capitalizedSlogans = slogans.map(s => s.charAt(0).toUpperCase() + s.slice(1));
         
         let bubbles = [];
@@ -131,6 +130,19 @@ document.addEventListener('DOMContentLoaded', () => {
         
         observer.observe(heroSection);
         window.addEventListener('resize', createBubbles); 
+    }
+
+    // --- Headline Backdrop Blur Effect ---
+    const headline = document.getElementById('main-headline');
+    if (headline) {
+        const text = headline.innerText;
+        const wrappedText = text.split('').map(char => {
+            if (char.trim() === '') {
+                return ' '; 
+            }
+            return `<span class="letter-wrap">${char}</span>`;
+        }).join('');
+        headline.innerHTML = wrappedText;
     }
 
 
