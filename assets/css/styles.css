@@ -71,9 +71,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* HEADER */
 .header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border-color); }
-.header__container { display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.header__container { display: flex; align-items: center; justify-content: space-between; height: 70px; }
 .header__brand { display: flex; align-items: center; gap: 12px; z-index: 101; }
-.header__logo { height: 60px; object-fit: contain; }
+.header__logo { height: 55px; object-fit: contain; }
 .header__nav { display: flex; gap: 30px; font-weight: 500; }
 .header__nav a { position: relative; padding: 5px 0; font-size: 1.15rem; }
 .header__nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--accent-red); transition: width 0.3s ease; }
@@ -132,7 +132,7 @@ img { max-width: 100%; height: auto; display: block; }
 .subscriptions { background: var(--white); }
 
 .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: stretch; }
-.card { background: var(--white); border: 1px solid var(--border-color); padding: 30px; transition: transform .3s ease, box-shadow .3s ease; }
+.card { background: var(--white); border: 1px solid var(--border-color); padding: 30px; transition: transform .3s ease, box-shadow .3s ease; display: flex; flex-direction: column; }
 .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,.05); }
 .card h3 { font-family: var(--font-headings); font-size: 1.5rem; margin-bottom: 1rem; }
 .card h4 { font-family: var(--font-headings); font-size: 1.1rem; margin-top: 25px; margin-bottom: 15px; font-weight: 500; padding-bottom: 5px; border-bottom: 1px solid var(--border-color); }
@@ -146,7 +146,7 @@ img { max-width: 100%; height: auto; display: block; }
 .card .price.single-price span { font-size: 1rem; color: var(--gray); font-family: var(--font-main); }
 .subscriptions .price.single-price { color: var(--accent-red); }
 .card .note { color: var(--gray); font-size: .9rem; margin-bottom: 1.5rem; }
-.card ul { list-style: none; margin-bottom: 1.5rem; }
+.card ul { list-style: none; margin: 0; padding: 0; } /* Убрали margin-bottom */
 .card ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
 .card ul li::before { content: '✓'; color: var(--black); position: absolute; left: 0; }
 .card ul li strong { font-weight: 700; }
@@ -162,11 +162,6 @@ img { max-width: 100%; height: auto; display: block; }
 .card-badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); color: var(--white); padding: 5px 15px; border-radius: 20px; font-size: .8rem; font-weight: 700; max-width: 90%; text-align: center; }
 .card-optimal .card-badge { background: var(--black); }
 .card-premium .card-badge { background: var(--accent-red); }
-
-/* PORTFOLIO */
-.portfolio { padding: 120px 0; background-color: var(--light-gray); }
-.portfolio-placeholder { text-align: center; padding: 80px 20px; border: 2px dashed var(--border-color); border-radius: 10px; }
-.portfolio-placeholder p { font-size: 1.2rem; line-height: 1.7; margin-bottom: 30px; }
 
 /* METRICS */
 .metrics { padding: 120px 0; }
@@ -212,44 +207,26 @@ img { max-width: 100%; height: auto; display: block; }
     .card { max-width: 600px; margin: 0 auto; }
 }
 
-/* ===== START: ИЗМЕНЕНИЯ ДЛЯ ВЫРАВНИВАНИЯ КАРТОЧЕК ===== */
 @media (min-width: 1024px) {
-  /* * Шаг 1: Превращаем карточку в Grid-контейнер.
-   * grid-template-rows задает 3 строки:
-   * 'auto' - для хедера, высота по контенту.
-   * '1fr' - для тела, растягивается на все доступное место.
-   * 'auto' - для кнопки, высота по контенту.
-   * Это гарантирует, что .card__body у всех карточек будут одинаковой высоты.
-   */
   .card {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
+    display: flex;
+    flex-direction: column;
   }
-
-  /* Сохраняем минимальную высоту для заголовков для визуальной консистентности */
   .card__header {
     min-height: 11rem;
   }
-  
-  /* * Шаг 2: Тело карточки тоже становится Grid-контейнером.
-   * grid-template-rows задает 2 строки:
-   * '1fr' - для первой секции ("Что делаем"), она растягивается, выталкивая вторую вниз.
-   * 'auto' - для второй секции ("Что получаете"), ее высота определяется контентом.
-   * Таким образом, секции "Что получаете" выравниваются по нижнему краю .card__body.
-   */
   .card__body {
-    display: grid;
-    grid-template-rows: 1fr auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
-
-  /* Обнуляем старые правила, которые больше не нужны */
-  .card__body .card__section:last-of-type,
+  .card__body .card__section:last-of-type {
+    margin-top: auto;
+  }
   .card .card-cta {
-    margin-top: 0;
+    margin-top: auto;
   }
 }
-/* ===== END: ИЗМЕНЕНИЯ ДЛЯ ВЫРАВНИВАНИЯ КАРТОЧЕК ===== */
-
 
 @media(max-width: 768px) {
     .header__nav, .header__actions { display: none; }
@@ -266,9 +243,9 @@ img { max-width: 100%; height: auto; display: block; }
     .process-tabs { flex-wrap: wrap; }
     .process-tab { flex-basis: 50%; white-space: normal; }
     
-    /* Сбрасываем десктопные правила для мобильных */
     .card__header { min-height: unset; }
-    .card__body { display: block; }
+    .card__body { flex-grow: 0; display: block; }
+    .card__body .card__section:last-of-type { margin-top: 0; }
 }
 
 @media(max-width: 480px) {
