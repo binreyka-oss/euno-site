@@ -20,12 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 0; i < numColumns; i++) {
             const column = document.createElement('div');
             column.className = 'slogan-column';
-            
             const shuffledSlogans = [...slogans].sort(() => 0.5 - Math.random());
             const columnSlogans = shuffledSlogans.slice(0, 15);
-
             const columnContent = [...columnSlogans, ...columnSlogans];
-            
             columnContent.forEach(text => {
                 const span = document.createElement('span');
                 span.textContent = text;
@@ -98,28 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // --- Accordion Logic ---
-    const accordionGroups = document.querySelectorAll('.accordion-grid');
-
-    accordionGroups.forEach(group => {
-        const items = group.querySelectorAll('.accordion-item');
-        
-        items.forEach((clickedItem) => {
-            const header = clickedItem.querySelector('.accordion-header');
-            header.addEventListener('click', () => {
-                const isActive = clickedItem.classList.contains('active');
-
-                items.forEach(item => {
-                    item.classList.remove('active');
-                });
-
-                if (!isActive) {
-                    clickedItem.classList.add('active');
-                }
-            });
-        });
-    });
 
     // --- Form Submission ---
     const leadForm = document.getElementById('lead-form');
