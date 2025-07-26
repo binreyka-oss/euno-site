@@ -211,26 +211,45 @@ img { max-width: 100%; height: auto; display: block; }
     .cards-grid, .principles-grid, .metrics-description-grid { grid-template-columns: 1fr; }
     .card { max-width: 600px; margin: 0 auto; }
 }
+
+/* ===== START: ИЗМЕНЕНИЯ ДЛЯ ВЫРАВНИВАНИЯ КАРТОЧЕК ===== */
 @media (min-width: 1024px) {
+  /* * Шаг 1: Превращаем карточку в Grid-контейнер.
+   * grid-template-rows задает 3 строки:
+   * 'auto' - для хедера, высота по контенту.
+   * '1fr' - для тела, растягивается на все доступное место.
+   * 'auto' - для кнопки, высота по контенту.
+   * Это гарантирует, что .card__body у всех карточек будут одинаковой высоты.
+   */
   .card {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
   }
+
+  /* Сохраняем минимальную высоту для заголовков для визуальной консистентности */
   .card__header {
     min-height: 11rem;
   }
+  
+  /* * Шаг 2: Тело карточки тоже становится Grid-контейнером.
+   * grid-template-rows задает 2 строки:
+   * '1fr' - для первой секции ("Что делаем"), она растягивается, выталкивая вторую вниз.
+   * 'auto' - для второй секции ("Что получаете"), ее высота определяется контентом.
+   * Таким образом, секции "Что получаете" выравниваются по нижнему краю .card__body.
+   */
   .card__body {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr auto;
   }
-  .card__body .card__section:last-of-type {
-    margin-top: auto;
-  }
+
+  /* Обнуляем старые правила, которые больше не нужны */
+  .card__body .card__section:last-of-type,
   .card .card-cta {
-    margin-top: auto;
+    margin-top: 0;
   }
 }
+/* ===== END: ИЗМЕНЕНИЯ ДЛЯ ВЫРАВНИВАНИЯ КАРТОЧЕК ===== */
+
 
 @media(max-width: 768px) {
     .header__nav, .header__actions { display: none; }
@@ -247,9 +266,9 @@ img { max-width: 100%; height: auto; display: block; }
     .process-tabs { flex-wrap: wrap; }
     .process-tab { flex-basis: 50%; white-space: normal; }
     
+    /* Сбрасываем десктопные правила для мобильных */
     .card__header { min-height: unset; }
-    .card__body { flex-grow: 0; display: block; }
-    .card__body .card__section:last-of-type { margin-top: 0; }
+    .card__body { display: block; }
 }
 
 @media(max-width: 480px) {
