@@ -96,9 +96,20 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .hero h1 {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-family: var(--font-headings);
+}
+.hero h1::before {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    z-index: -1;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    mask-image: radial-gradient(ellipse, black 40%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse, black 40%, transparent 70%);
 }
 .hero__slogans-bg {
     position: absolute;
@@ -180,7 +191,6 @@ img { max-width: 100%; height: auto; display: block; }
     position: relative;
     overflow: hidden;
 }
-/* ИЗМЕНЕНИЕ: Добавлены стили для видеофона и оверлея */
 .about__video-bg {
     position: absolute;
     top: 50%;
@@ -212,7 +222,6 @@ img { max-width: 100%; height: auto; display: block; }
 .about__text {
     max-width: 800px;
     text-align: center;
-    /* ИЗМЕНЕНИЕ: Цвет текста сделан белым для читаемости */
     color: var(--white);
 }
 .about__text .section-title {
