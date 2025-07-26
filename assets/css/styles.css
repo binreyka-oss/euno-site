@@ -22,6 +22,10 @@ img { max-width: 100%; height: auto; display: block; }
 .section-title { font-family: var(--font-headings); font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 20px; font-weight: 400; text-align: center; }
 .section-subtitle { text-align: center; font-size: 1.1rem; color: var(--gray); margin-bottom: 60px; }
 .section-divider { border: none; height: 1px; background-color: var(--border-color); margin: 0; }
+/* Общий класс для акцентного красного текста */
+.text-accent {
+    color: var(--accent-red);
+}
 
 /* CURSOR TRAIL */
 .cursor-trail {
@@ -53,7 +57,6 @@ img { max-width: 100%; height: auto; display: block; }
 .header__cta:hover { background: #c41235; color: var(--white); }
 .burger-menu { display: none; }
 
-/* ИЗМЕНЕНИЕ: Стили для бегущей строки заменены на стили для кругов (пузырей) */
 /* HERO & SLOGAN BUBBLES */
 .hero {
     min-height: 90vh;
@@ -61,7 +64,6 @@ img { max-width: 100%; height: auto; display: block; }
     align-items: center;
     text-align: center;
     position: relative;
-    /* overflow: hidden; убрано, чтобы круги не обрезались */
 }
 .hero__container {
     position: relative;
@@ -70,6 +72,8 @@ img { max-width: 100%; height: auto; display: block; }
 .hero h1 {
     position: relative;
     z-index: 2;
+    /* ИЗМЕНЕНИЕ: Увеличен максимальный размер шрифта */
+    font-size: clamp(2.5rem, 5vw, 4rem);
 }
 .hero__slogans-bg {
     position: absolute;
@@ -92,8 +96,9 @@ img { max-width: 100%; height: auto; display: block; }
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.75);
-    border: 1px solid var(--border-color); /* Используем --border-color вместо --black для мягкости */
-    color: var(--black); /* Используем --black вместо --accent-red для соответствия стилю */
+    border: 1px solid var(--border-color);
+    /* ИЗМЕНЕНИЕ: Цвет текста сделан красным */
+    color: var(--accent-red);
     box-shadow: 0 0 15px rgba(0,0,0,0.05);
 }
 
@@ -219,6 +224,10 @@ img { max-width: 100%; height: auto; display: block; }
 .card .price.price-stacked .old-price { margin-bottom: 5px; }
 .card .price.single-price { font-family: var(--font-headings); font-size: 2rem; }
 .card .price.single-price span { font-size: 1rem; color: var(--gray); font-family: var(--font-main); }
+/* ИЗМЕНЕНИЕ: Цены в блоке подписок сделаны красными */
+.subscriptions .price.single-price {
+    color: var(--accent-red);
+}
 .card .note { color: var(--gray); font-size: .9rem; margin-bottom: 1.5rem; }
 .card ul { list-style: none; margin-bottom: 1.5rem; flex-grow: 1; }
 .card ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
@@ -253,7 +262,13 @@ img { max-width: 100%; height: auto; display: block; }
 /* METRICS */
 .metrics { padding: 120px 0; }
 .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: center; margin-bottom: 40px; }
-.metric-item__value { font-family: var(--font-headings); font-size: 5rem; line-height: 1; }
+/* ИЗМЕНЕНИЕ: Цифры сделаны красными */
+.metric-item__value {
+    font-family: var(--font-headings);
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--accent-red);
+}
 .metric-item__desc { font-size: 1.1rem; color: var(--gray); }
 .metrics-note { text-align: center; color: var(--gray); }
 
@@ -266,15 +281,18 @@ img { max-width: 100%; height: auto; display: block; }
 .contact__email, .contact__phone { font-family: var(--font-headings); font-size: 1.5rem; }
 .contact__socials {
     display: flex;
-    gap: 20px;
+    /* ИЗМЕНЕНИЕ: Выравнивание по вертикали */
+    flex-direction: column;
+    gap: 15px;
     margin-top: 15px;
     padding-top: 15px;
     border-top: 1px solid var(--border-color);
     width: 100%;
 }
 .contact__social-link {
-    font-size: 1.2rem;
-    font-weight: 500;
+    /* ИЗМЕНЕНИЕ: Стили приведены к стилям телефона и почты */
+    font-family: var(--font-headings);
+    font-size: 1.5rem;
 }
 
 .contact__form form { display: grid; gap: 14px; }
