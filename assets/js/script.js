@@ -37,6 +37,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // --- Emoji Cursor Trail ---
+    const foodEmojis = ['🍕', '🍔', '🍟', '🍣', '🍩', '🍦', '🍪', '🥑', '🌮', '🍓', '🍉', '🍇', '🍎', '🥕', '🥦', '☕️', '🍹', '🍺', '🍷', '🍰', '🍿', '🥐'];
+    let canCreateTrail = true;
+    
+    document.addEventListener('mousemove', e => {
+        if (canCreateTrail) {
+            canCreateTrail = false;
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.textContent = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+            trail.style.left = `${e.clientX}px`;
+            trail.style.top = `${e.clientY}px`;
+            
+            document.body.appendChild(trail);
+
+            setTimeout(() => {
+                trail.remove();
+            }, 1000); // Удаляем элемент после завершения анимации
+
+            setTimeout(() => {
+                canCreateTrail = true;
+            }, 50); // Ограничиваем частоту создания элементов
+        }
+    });
+
 
     // --- Burger Menu ---
     const burger = document.getElementById('burger-menu');
@@ -98,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button.disabled = true;
         button.textContent = 'Отправка...';
         try {
+            // ВАЖНО: '/api/lead' - это адрес для отправки. 
+            // Vercel может автоматически обрабатывать файлы в папке /api как serverless-функции.
             const res = await fetch('/api/lead', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -110,7 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Ошибка отправки. Попробуйте снова позже.');
             }
         } catch (err) {
-            alert('Произошла ошибка сети.');
+            // Для демонстрации на GitHub Pages можно убрать try-catch и просто показывать alert
+            console.error("Ошибка отправки формы:", err);
+            alert('Произошла ошибка сети. Для демонстрации форма не отправляется.');
+            form.reset();
         } finally {
             button.disabled = false;
             button.textContent = originalButtonText;
