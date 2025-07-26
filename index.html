@@ -5,25 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUNO — Брендинговое агентство</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="assets/css/styles.css">
-
 </head>
 <body>
-
     <header class="header">
         <div class="container header__container">
             <a href="#" class="header__brand">
                 <img src="assets/images/logo.png" alt="EUNO Logo" class="header__logo">
             </a>
             <nav class="header__nav">
-                <a href="#portfolio">Портфолио</a>
                 <a href="#about">О нас</a>
+                <a href="#process">Процесс</a>
                 <a href="#services">Услуги</a>
+                <a href="#portfolio">Портфолио</a>
                 <a href="#contact">Контакты</a>
             </nav>
             <div class="header__actions">
@@ -39,189 +36,114 @@
     </header>
 
     <div class="mobile-nav" id="mobile-nav">
-        <a href="#portfolio">Портфолио</a>
         <a href="#about">О нас</a>
+        <a href="#process">Процесс</a>
         <a href="#services">Услуги</a>
+        <a href="#portfolio">Портфолио</a>
         <a href="#contact">Контакты</a>
         <a href="tel:+79991234567" class="mobile-nav__phone">+7 999 123-45-67</a>
     </div>
 
     <main>
         <section class="hero">
-            <div class="hero__slogans-bg" id="slogans-container">
-                </div>
-            <div class="container hero__container">
-                <h1 id="main-headline">EUNO — брендинговоее агентство. Находим уникальную ценность бизнеса и&nbsp;превращаем её в&nbsp;измеримый рост.</h1>
-            </div>
-        </section>
+            </section>
 
-        <section id="portfolio" class="portfolio">
-             <div class="container">
-                <h2 class="section-title">Портфолио</h2>
-                <div class="portfolio-placeholder">
-                    <p>Здесь скоро появятся истории успеха наших первых клиентов.<br>Станьте одним из них на специальных условиях.</p>
-                    <a href="#services" class="header__cta">Посмотреть условия</a>
-                </div>
-            </div>
-        </section>
-        
+        <section id="about" class="about"></section>
+        <section id="archetypes" class="archetypes"></section>
+        <div class="container"> <hr class="section-divider"> </div>
+        <section id="process" class="process"></section>
         <div class="container"> <hr class="section-divider"> </div>
 
-        <section id="about" class="about">
-            <div class="container about__container">
-                <div class="about__text">
-                    <h2 class="section-title">О нас</h2>
-                    <p><strong>EUNO — агентство для предпринимателей-визионеров, которые знают, что по-настоящему ценно.</strong></p>
-                    <p>Мы находим суть вашего дела и превращаем её в бренд-платформу, которая помогает бизнесу расти и приносит пользу людям и отрасли.</p>
-                    <p>Соединяя аналитическую мудрость (Sage), смелое творчество (Creator) и искреннюю заботу (Caregiver), мы показываем: бренд способен одновременно увеличивать прибыль и оставлять положительный след для клиентов, команды и рынка.</p>
-                    <p>Мы думаем о смысле, опираемся на данные и действуем с заботой о клиенте, чтобы красота никогда не была отделена от сути, прибыли и ценности.</p>
-                    <p>Наша миссия в том, чтобы через творческий подход и стратегический брендинг мы помогали бизнесам эволюционировать, оставлять значимый след в истории и вносить вклад в прогресс человечества.</p>
-                </div>
-                <div class="about__image">
-                     <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80" alt="Команда EUNO">
-                </div>
-            </div>
-        </section>
-        
-        <section id="archetypes" class="archetypes">
-            <div class="container">
-                <h2 class="section-title">Наши архетипы</h2>
-                <div class="archetypes-grid">
-                    <div class="archetype-item">
-                        <h3>Sage</h3>
-                        <p>Аналитическая мудрость и стратегическое мышление</p>
-                    </div>
-                    <div class="archetype-item">
-                        <h3>Creator</h3>
-                        <p>Творческая смелость и инновационный подход</p>
-                    </div>
-                    <div class="archetype-item">
-                        <h3>Caregiver</h3>
-                        <p>Искренняя забота и поддержка людей</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <div class="container"> <hr class="section-divider"> </div>
-
-        <section id="process" class="process">
-            <div class="container">
-                <h2 class="section-title">Процесс, который дает результат</h2>
-                <div class="process-interactive">
-                    <div class="process-progress-bar">
-                        <div class="process-progress-bar__fill" id="progressBarFill"></div>
-                    </div>
-                    <div class="process-tabs">
-                        <div class="process-tab active" data-phase="1"><span>01</span> Погружение</div>
-                        <div class="process-tab" data-phase="2"><span>02</span> Стратегия</div>
-                        <div class="process-tab" data-phase="3"><span>03</span> Дизайн и внедрение</div>
-                        <div class="process-tab" data-phase="4"><span>04</span> Анализ и поддержка</div>
-                        <div class="process-tab" data-phase="5"><span>05</span> Партнёрство</div>
-                    </div>
-                    <div class="process-content-wrapper">
-                        <div class="process-content active" data-phase="1">
-                            <h3>Вместе с вами находим скрытые точки роста</h3>
-                            <p>Это не аудит, а совместное исследование. Мы проводим стратегический воркшоп с вашей командой и глубинные интервью с вашими клиентами. Мы ищем не проблемы, а возможности, которые лежат внутри вашего бизнеса, но пока не очевидны.</p>
-                        </div>
-                        <div class="process-content" data-phase="2">
-                            <h3>Превращаем возможности в четкий план действий</h3>
-                            <p>Мы создаем Brand-OS — «операционную систему» вашего бренда. Это не просто красивые слова, а ваш главный компас для принятия бизнес-решений, который помогает всей команде двигаться в одном направлении и говорить на одном языке.</p>
-                        </div>
-                        <div class="process-content" data-phase="3">
-                            <h3>Даем вашей ценности голос и лицо</h3>
-                            <p>Стратегия оживает в дизайне. Мы создаем визуальный язык, который точно доносит вашу уникальность до аудитории, и разрабатываем Staff Playbook — понятные инструкции, которые помогают сотрудникам стать настоящими амбассадорами бренда.</p>
-                        </div>
-                        <div class="process-content" data-phase="4">
-                            <h3>Доказываем эффективность цифрами</h3>
-                            <p>Мы готовим детальный Impact-Report, где наглядно показываем, как наша работа повлияла на ключевые бизнес-метрики. Никакой магии — только прозрачный анализ и подтвержденные результаты, которые вы можете использовать для дальнейшего роста.</p>
-                        </div>
-                         <div class="process-content" data-phase="5">
-                            <h3>Ваш успех становится нашей общей историей</h3>
-                            <p>Мы не прощаемся после проекта. Мы публикуем совместный кейс, который укрепляет вашу репутацию на рынке, и предлагаем форматы постоянной поддержки, чтобы ваш бренд продолжал развиваться и приносить прибыль.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="container"> <hr class="section-divider"> </div>
 
         <section id="services" class="services">
             <div class="container">
                 <h2 class="section-title">Основные услуги</h2>
                 <p class="section-subtitle">Специальные условия для первых 3-х клиентов для пополнения портфолио</p>
-                <div class="cards-grid">
-                
-                    <div class="card">
-                        <h3>P1 «Первый Взгляд»</h3>
-                        <div class="price price-stacked">
-                            <span class="old-price">79&nbsp;000&nbsp;₽</span>
-                            <span class="new-price price-highlight">52&nbsp;700&nbsp;₽</span>
+                <div class="accordion-grid" data-accordion-group="services">
+                    
+                    <div class="accordion-item card">
+                        <div class="accordion-header">
+                            <h3>P1 «Первый Взгляд»</h3>
+                            <div class="price price-stacked">
+                                <span class="old-price">79&nbsp;000&nbsp;₽</span>
+                                <span class="new-price price-highlight">52&nbsp;700&nbsp;₽</span>
+                            </div>
                         </div>
-                        <p class="note">Определяем вашу стартовую точку «А», выделяем три приоритета роста и формулируем первые гипотезы позиционирования.</p>
-                        <h4>Что делаем</h4>
-                        <ul>
-                            <li>SWOT- и PESTEL-диагностика бизнеса</li>
-                            <li>Аудит конкурентов с кратким сравнением ключевых KPI</li>
-                            <li>Анализ трендов (Trend Canvas 2.0)</li>
-                            <li>Глубинные интервью с гостями (JTBD)</li>
-                        </ul>
-                        <h4>Что получаете</h4>
-                        <ul>
-                            <li>Одностраничный отчёт: все выводы + карта позиции на рынке</li>
-                            <li>Черновик позиционирования: 2-3 гипотезы с примерами</li>
-                            <li>Таблицу KPI конкурентов</li>
-                        </ul>
-                        <p class="note final-price">Пакет — экспресс-диагностика: он не обещает прироста, но даёт чёткую точку отсчёта и понятный план.</p>
-                        <a href="#contact" class="card-cta">Заказать аудит</a>
+                        <div class="accordion-content">
+                            <p class="note">Определяем вашу стартовую точку «А», выделяем три приоритета роста и формулируем первые гипотезы позиционирования.</p>
+                            <h4>Что делаем</h4>
+                            <ul>
+                                <li>SWOT- и PESTEL-диагностика бизнеса</li>
+                                <li>Аудит конкурентов с кратким сравнением ключевых KPI</li>
+                                <li>Анализ трендов (Trend Canvas 2.0)</li>
+                                <li>Глубинные интервью с гостями (JTBD)</li>
+                            </ul>
+                            <h4>Что получаете</h4>
+                            <ul>
+                                <li>Одностраничный отчёт: все выводы + карта позиции на рынке</li>
+                                <li>Черновик позиционирования: 2-3 гипотезы с примерами</li>
+                                <li>Таблицу KPI конкурентов</li>
+                            </ul>
+                            <p class="note final-price">Пакет — экспресс-диагностика: он не обещает прироста, но даёт чёткую точку отсчёта и понятный план.</p>
+                            <a href="#contact" class="card-cta">Заказать аудит</a>
+                        </div>
                     </div>
 
-                    <div class="card card-optimal">
-                        <div class="card-badge">Оптимальный</div>
-                        <h3>P2 «Бренд-Система»</h3>
-                         <div class="price price-stacked">
-                            <span class="old-price">390&nbsp;000&nbsp;₽</span>
-                            <span class="new-price price-highlight">260&nbsp;000&nbsp;₽</span>
+                    <div class="accordion-item card card-optimal">
+                         <div class="card-badge">Оптимальный</div>
+                        <div class="accordion-header">
+                            <h3>P2 «Бренд-Система»</h3>
+                            <div class="price price-stacked">
+                                <span class="old-price">390&nbsp;000&nbsp;₽</span>
+                                <span class="new-price price-highlight">260&nbsp;000&nbsp;₽</span>
+                            </div>
                         </div>
-                        <p class="note">После экспресс-диагностики «Первый Взгляд» мы переходим от анализа к готовой системе бренда и плану её внедрения.</p>
-                        <h4>Что делаем</h4>
-                        <ul>
-                            <li>Всё из пакета «Первый Взгляд»</li>
-                            <li>Brand-OS — одностраничная схема сути бренда</li>
-                            <li>Позиционирование меню + CX-Blueprint (CX — клиентский опыт)</li>
-                            <li>Гайд по визуалу: логотип, цветовая палитра, шрифты</li>
-                            <li>90-дневная дорожная карта внедрения с ключевыми вехами</li>
-                            <li>Стратегический воркшоп (1 день) с руководящей командой</li>
-                            <li>Базовая KPI-панель для отслеживания RevPASH* и NPS**</li>
-                        </ul>
-                        <p class="note final-price">*RevPASH — выручка на посадочное место-час.<br>**NPS — индекс готовности рекомендовать.</p>
-                        <a href="#contact" class="card-cta">Обсудить проект</a>
+                        <div class="accordion-content">
+                            <p class="note">После экспресс-диагностики «Первый Взгляд» мы переходим от анализа к готовой системе бренда и плану её внедрения.</p>
+                             <h4>Что делаем</h4>
+                             <ul>
+                                 <li>Всё из пакета «Первый Взгляд»</li>
+                                 <li>Brand-OS — одностраничная схема сути бренда</li>
+                                 <li>Позиционирование меню + CX-Blueprint (CX — клиентский опыт)</li>
+                                 <li>Гайд по визуалу: логотип, цветовая палитра, шрифты</li>
+                                 <li>90-дневная дорожная карта внедрения с ключевыми вехами</li>
+                                 <li>Стратегический воркшоп (1 день) с руководящей командой</li>
+                                 <li>Базовая KPI-панель для отслеживания RevPASH* и NPS**</li>
+                             </ul>
+                            <p class="note final-price">*RevPASH — выручка на посадочное место-час.<br>**NPS — индекс готовности рекомендовать.</p>
+                            <a href="#contact" class="card-cta">Обсудить проект</a>
+                        </div>
                     </div>
                     
-                    <div class="card card-premium">
+                    <div class="accordion-item card card-premium">
                         <div class="card-badge">Максимальное внедрение</div>
-                        <h3>P3 «Экосистема Бренда 360°»</h3>
-                         <div class="price price-stacked">
-                            <span class="old-price">650&nbsp;000&nbsp;₽</span>
-                            <span class="new-price price-highlight">433&nbsp;000&nbsp;₽</span>
+                        <div class="accordion-header">
+                            <h3>P3 «Экосистема Бренда 360°»</h3>
+                            <div class="price price-stacked">
+                                <span class="old-price">650&nbsp;000&nbsp;₽</span>
+                                <span class="new-price price-highlight">433&nbsp;000&nbsp;₽</span>
+                            </div>
                         </div>
-                        <p class="note">От стратегии к внедрению: мы входим в операционные процессы, обучаем команду и сопровождаем внедрение.</p>
-                        <h4>Что делаем</h4>
-                        <ul>
-                            <li>Всё из пакета «Бренд-Система»</li>
-                            <li>Глубокое обучение персонала (4 модуля + 6 нед. коучинга)</li>
-                            <li>Menu-Engineering — спринт оптимизации меню</li>
-                            <li>Полная онлайн-панель KPI (22 показателя) с автоподтягиванием</li>
-                        </ul>
-                        <h4>Результат и гарантия</h4>
-                         <ul>
-                            <li>+ 5 % RevPASH за 120 дней</li>
-                            <li>− 30 % Complaint Rate за 120 дней</li>
-                            <li>Если цели не достигнуты — месяц коучинга бесплатно</li>
-                         </ul>
-                         <p class="note final-price">Для дальнейшего мониторинга доступны подписки S-серии.</p>
-                        <a href="#contact" class="card-cta">Стать клиентом</a>
+                        <div class="accordion-content">
+                            <p class="note">От стратегии к внедрению: мы входим в операционные процессы, обучаем команду и сопровождаем внедрение.</p>
+                             <h4>Что делаем</h4>
+                             <ul>
+                                 <li>Всё из пакета «Бренд-Система»</li>
+                                 <li>Глубокое обучение персонала (4 модуля + 6 нед. коучинга)</li>
+                                 <li>Menu-Engineering — спринт оптимизации меню</li>
+                                 <li>Полная онлайн-панель KPI (22 показателя) с автоподтягиванием</li>
+                             </ul>
+                             <h4>Результат и гарантия</h4>
+                              <ul>
+                                 <li>+ 5 % RevPASH за 120 дней</li>
+                                 <li>− 30 % Complaint Rate за 120 дней</li>
+                                 <li>Если цели не достигнуты — месяц коучинга бесплатно</li>
+                              </ul>
+                             <p class="note final-price">Для дальнейшего мониторинга доступны подписки S-серии.</p>
+                            <a href="#contact" class="card-cta">Стать клиентом</a>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -231,105 +153,71 @@
         <section class="subscriptions">
             <div class="container">
                 <h2 class="section-title">Постоянная поддержка</h2>
-                <div class="cards-grid">
-                      <div class="card">
-                          <h3>S-1 «Пульс»</h3>
-                          <p class="price single-price">24&nbsp;900&nbsp;₽<span>/&nbsp;мес.</span></p>
-                          <p class="note">Мониторинг ключевых показателей бренда.</p>
-                          <ul>
-                                <li>Доступ к панели (10 KPI)</li>
-                                <li>1-часовой стратегический звонок</li>
-                                <li>Квартальный мини-аудит в PDF</li>
-                          </ul>
-                          <a href="#contact" class="card-cta">Выбрать «Пульс»</a>
+                <div class="accordion-grid" data-accordion-group="subscriptions">
+                      
+                      <div class="accordion-item card">
+                          <div class="accordion-header">
+                              <h3>S-1 «Пульс»</h3>
+                              <p class="price single-price">24&nbsp;900&nbsp;₽<span>/&nbsp;мес.</span></p>
+                          </div>
+                          <div class="accordion-content">
+                              <p class="note">Мониторинг ключевых показателей бренда для поддержания фокуса.</p>
+                              <h4>Что получаете</h4>
+                              <ul>
+                                  <li>Доступ к панели мониторинга (10 KPI)</li>
+                                  <li>Ежемесячный 1-часовой стратегический звонок</li>
+                                  <li>Квартальный мини-аудит и отчёт в PDF</li>
+                              </ul>
+                              <a href="#contact" class="card-cta">Выбрать «Пульс»</a>
+                          </div>
                       </div>
-                      <div class="card">
-                          <h3>S-2 «Драйв»</h3>
-                          <p class="price single-price">59&nbsp;900&nbsp;₽<span>/&nbsp;мес.</span></p>
-                          <p class="note">Активная работа над контентом и меню.</p>
-                          <ul>
-                                <li>Всё из S-1</li>
-                                <li>А/В-тест меню (1 позиция/мес.)</li>
-                                <li>Контент-календарь и 16 SMM-постов</li>
-                                <li>Квартальный воркшоп на месте</li>
-                          </ul>
-                          <a href="#contact" class="card-cta">Выбрать «Драйв»</a>
+
+                      <div class="accordion-item card">
+                          <div class="accordion-header">
+                              <h3>S-2 «Драйв»</h3>
+                              <p class="price single-price">59&nbsp;900&nbsp;₽<span>/&nbsp;мес.</span></p>
+                          </div>
+                          <div class="accordion-content">
+                              <p class="note">Активная работа над контентом и меню для постоянного улучшения.</p>
+                              <h4>Что получаете</h4>
+                              <ul>
+                                  <li>Всё из пакета S-1</li>
+                                  <li>А/В-тестирование меню (1 позиция в месяц)</li>
+                                  <li>Контент-календарь и 16 готовых SMM-постов</li>
+                                  <li>Ежеквартальный воркшоп с командой на месте</li>
+                              </ul>
+                              <a href="#contact" class="card-cta">Выбрать «Драйв»</a>
+                          </div>
                       </div>
-                      <div class="card">
-                          <h3>S-3 «Экспансия»</h3>
-                          <p class="price single-price">119&nbsp;000&nbsp;₽<span>/&nbsp;мес.</span></p>
-                          <p class="note">Стратегическая поддержка для масштабирования.</p>
-                          <ul>
-                                <li>Всё из S-2</li>
-                                <li>Идея pop-up / dark-kitchen (1/кв.)</li>
-                                <li>Поддержка по созданию Franchise Playbook</li>
-                                <li>Дизайн-поддержка (до 30 ч/мес.)</li>
-                          </ul>
-                          <a href="#contact" class="card-cta">Выбрать «Экспансию»</a>
+                      
+                      <div class="accordion-item card">
+                          <div class="accordion-header">
+                              <h3>S-3 «Экспансия»</h3>
+                              <p class="price single-price">119&nbsp;000&nbsp;₽<span>/&nbsp;мес.</span></p>
+                          </div>
+                           <div class="accordion-content">
+                              <p class="note">Стратегическая поддержка для масштабирования бизнеса и выхода на новые рынки.</p>
+                              <h4>Что получаете</h4>
+                              <ul>
+                                  <li>Всё из пакета S-2</li>
+                                  <li>Разработка идеи pop-up / dark-kitchen (1 в квартал)</li>
+                                  <li>Поддержка по созданию Franchise Playbook</li>
+                                  <li>Дизайн-поддержка (до 30 часов в месяц)</li>
+                              </ul>
+                              <a href="#contact" class="card-cta">Выбрать «Экспансию»</a>
+                          </div>
                       </div>
                 </div>
             </div>
         </section>
 
         <div class="container"> <hr class="section-divider"> </div>
-
-        <section id="metrics" class="metrics">
-            <div class="container">
-                <h2 class="section-title">Наши цели — ваши результаты</h2>
-                <div class="metrics-grid">
-                    <div class="metric-item">
-                        <div class="metric-item__value">+5%</div>
-                        <div class="metric-item__desc">Рост RevPASH*</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-item__value">+20%</div>
-                        <div class="metric-item__desc">Рост eNPS*</div>
-                    </div>
-                    <div class="metric-item">
-                        <div class="metric-item__value">-15%</div>
-                        <div class="metric-item__desc">Снижение отходов*</div>
-                    </div>
-                </div>
-                <p class="metrics-note">*Мы определим целевые KPI для вашего бизнеса и построим работу на их достижение.</p>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container contact__container">
-                <div class="contact__info">
-                    <h2 class="section-title">Давайте работать вместе</h2>
-                    <p>Расскажите о вашей задаче, и мы свяжемся с вами, чтобы назначить первую встречу-знакомство.</p>
-                    <div class="contact__links">
-                        <a href="tel:+79991234567" class="contact__phone">+7 999 123-45-67</a>
-                        <a href="mailto:hello@euno.agency" class="contact__email">hello@euno.agency</a>
-                    </div>
-                </div>
-                <div class="contact__form">
-                     <form id="lead-form">
-                        <label>Имя<input type="text" name="name" required></label>
-                        <label>Телефон<input type="tel" name="phone" required></label>
-                        <label>Email<input type="email" name="email" required></label>
-                        <label>Компания<input type="text" name="company"></label>
-                        <label class="consent">
-                            <input type="checkbox" name="consent" required> Я соглашаюсь на обработку персональных данных
-                        </label>
-                        <button type="submit" class="cta-btn">Отправить заявку</button>
-                    </form>
-                </div>
-            </div>
-        </section>
+        <section id="metrics" class="metrics"></section>
+        <section id="portfolio" class="portfolio"></section>
+        <section id="contact" class="contact"></section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer__container">
-            <p>© EUNO 2025</p>
-            <nav class="footer__nav">
-                <a href="https://t.me/yourtelegram" target="_blank">Telegram</a>
-                <a href="https://wa.me/79991234567" target="_blank">WhatsApp</a>
-            </nav>
-            <a href="#top">Наверх</a>
-        </div>
-    </footer>
+    <footer class="footer"></footer>
 
     <script src="assets/js/script.js" defer></script>
 </body>
