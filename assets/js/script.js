@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const size = 120 + Math.random() * 50;
                 const bubble = {
                     element: span, x: 0, y: 0,
-                    // ИЗМЕНЕНИЕ: Скорость замедлена в 1.5 раза (2.0 / 1.5 = 1.33)
                     vx: (Math.random() - 0.5) * 1.33,
                     vy: (Math.random() - 0.5) * 1.33,
                     size: size, radius: size / 2
@@ -130,8 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(heroSection);
         window.addEventListener('resize', createBubbles); 
     }
-
-    // ИЗМЕНЕНИЕ: Скрипт для "обертывания" букв удален
 
     // --- Emoji Cursor Trail ---
     const foodEmojis = ['🍕', '🍔', '🍟', '🍣', '🍩', '🍦', '🍪', '🥑', '🌮', '🍓', '🍉', '🍇', '🍎', '🥕', '🥦', '☕️', '🍹', '🍺', '🍷', '🍰', '🍿', '🥐'];
