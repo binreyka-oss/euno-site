@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUNO — Брендинговое агентство</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Unbounded:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+
     <header class="header">
         <div class="container header__container">
             <a href="#" class="header__brand">
@@ -46,14 +49,92 @@
 
     <main>
         <section class="hero">
-            </section>
+            <div class="hero__slogans-bg" id="slogans-container">
+                </div>
+            <div class="container hero__container">
+                <h1 id="main-headline">EUNO — брендинговоее агентство. Находим уникальную ценность бизнеса и&nbsp;превращаем её в&nbsp;измеримый рост.</h1>
+            </div>
+        </section>
 
-        <section id="about" class="about"></section>
-        <section id="archetypes" class="archetypes"></section>
-        <div class="container"> <hr class="section-divider"> </div>
-        <section id="process" class="process"></section>
+        <section id="about" class="about">
+            <div class="container about__container">
+                <div class="about__text">
+                    <h2 class="section-title">О нас</h2>
+                    <p><strong>EUNO — агентство для предпринимателей-визионеров, которые знают, что по-настоящему ценно.</strong></p>
+                    <p>Мы находим суть вашего дела и превращаем её в бренд-платформу, которая помогает бизнесу расти и приносит пользу людям и отрасли.</p>
+                    <p>Соединяя аналитическую мудрость (Sage), смелое творчество (Creator) и искреннюю заботу (Caregiver), мы показываем: бренд способен одновременно увеличивать прибыль и оставлять положительный след для клиентов, команды и рынка.</p>
+                    <p>Мы думаем о смысле, опираемся на данные и действуем с заботой о клиенте, чтобы красота никогда не была отделена от сути, прибыли и ценности.</p>
+                    <p>Наша миссия в том, чтобы через творческий подход и стратегический брендинг мы помогали бизнесам эволюционировать, оставлять значимый след в истории и вносить вклад в прогресс человечества.</p>
+                </div>
+                <div class="about__image">
+                     <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80" alt="Команда EUNO">
+                </div>
+            </div>
+        </section>
+        
+        <section id="archetypes" class="archetypes">
+            <div class="container">
+                <h2 class="section-title">Наши архетипы</h2>
+                <div class="archetypes-grid">
+                    <div class="archetype-item">
+                        <h3>Sage</h3>
+                        <p>Аналитическая мудрость и стратегическое мышление</p>
+                    </div>
+                    <div class="archetype-item">
+                        <h3>Creator</h3>
+                        <p>Творческая смелость и инновационный подход</p>
+                    </div>
+                    <div class="archetype-item">
+                        <h3>Caregiver</h3>
+                        <p>Искренняя забота и поддержка людей</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <div class="container"> <hr class="section-divider"> </div>
 
+        <section id="process" class="process">
+            <div class="container">
+                <h2 class="section-title">Процесс, который дает результат</h2>
+                <div class="process-interactive">
+                    <div class="process-progress-bar">
+                        <div class="process-progress-bar__fill" id="progressBarFill"></div>
+                    </div>
+                    <div class="process-tabs">
+                        <div class="process-tab active" data-phase="1"><span>01</span> Погружение</div>
+                        <div class="process-tab" data-phase="2"><span>02</span> Стратегия</div>
+                        <div class="process-tab" data-phase="3"><span>03</span> Дизайн и внедрение</div>
+                        <div class="process-tab" data-phase="4"><span>04</span> Анализ и поддержка</div>
+                        <div class="process-tab" data-phase="5"><span>05</span> Партнёрство</div>
+                    </div>
+                    <div class="process-content-wrapper">
+                        <div class="process-content active" data-phase="1">
+                            <h3>Вместе с вами находим скрытые точки роста</h3>
+                            <p>Это не аудит, а совместное исследование. Мы проводим стратегический воркшоп с вашей командой и глубинные интервью с вашими клиентами. Мы ищем не проблемы, а возможности, которые лежат внутри вашего бизнеса, но пока не очевидны.</p>
+                        </div>
+                        <div class="process-content" data-phase="2">
+                            <h3>Превращаем возможности в четкий план действий</h3>
+                            <p>Мы создаем Brand-OS — «операционную систему» вашего бренда. Это не просто красивые слова, а ваш главный компас для принятия бизнес-решений, который помогает всей команде двигаться в одном направлении и говорить на одном языке.</p>
+                        </div>
+                        <div class="process-content" data-phase="3">
+                            <h3>Даем вашей ценности голос и лицо</h3>
+                            <p>Стратегия оживает в дизайне. Мы создаем визуальный язык, который точно доносит вашу уникальность до аудитории, и разрабатываем Staff Playbook — понятные инструкции, которые помогают сотрудникам стать настоящими амбассадорами бренда.</p>
+                        </div>
+                        <div class="process-content" data-phase="4">
+                            <h3>Доказываем эффективность цифрами</h3>
+                            <p>Мы готовим детальный Impact-Report, где наглядно показываем, как наша работа повлияла на ключевые бизнес-метрики. Никакой магии — только прозрачный анализ и подтвержденные результаты, которые вы можете использовать для дальнейшего роста.</p>
+                        </div>
+                         <div class="process-content" data-phase="5">
+                            <h3>Ваш успех становится нашей общей историей</h3>
+                            <p>Мы не прощаемся после проекта. Мы публикуем совместный кейс, который укрепляет вашу репутацию на рынке, и предлагаем форматы постоянной поддержки, чтобы ваш бренд продолжал развиваться и приносить прибыль.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container"> <hr class="section-divider"> </div>
 
         <section id="services" class="services">
             <div class="container">
@@ -212,12 +293,74 @@
         </section>
 
         <div class="container"> <hr class="section-divider"> </div>
-        <section id="metrics" class="metrics"></section>
-        <section id="portfolio" class="portfolio"></section>
-        <section id="contact" class="contact"></section>
+        
+        <section id="metrics" class="metrics">
+            <div class="container">
+                <h2 class="section-title">Наши цели — ваши результаты</h2>
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <div class="metric-item__value">+5%</div>
+                        <div class="metric-item__desc">Рост RevPASH*</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item__value">+20%</div>
+                        <div class="metric-item__desc">Рост eNPS*</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-item__value">-15%</div>
+                        <div class="metric-item__desc">Снижение отходов*</div>
+                    </div>
+                </div>
+                <p class="metrics-note">*Мы определим целевые KPI для вашего бизнеса и построим работу на их достижение.</p>
+            </div>
+        </section>
+
+        <section id="portfolio" class="portfolio">
+             <div class="container">
+                <h2 class="section-title">Портфолио</h2>
+                <div class="portfolio-placeholder">
+                    <p>Здесь скоро появятся истории успеха наших первых клиентов.<br>Станьте одним из них на специальных условиях.</p>
+                    <a href="#services" class="header__cta">Посмотреть условия</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact" class="contact">
+            <div class="container contact__container">
+                <div class="contact__info">
+                    <h2 class="section-title">Давайте работать вместе</h2>
+                    <p>Расскажите о вашей задаче, и мы свяжемся с вами, чтобы назначить первую встречу-знакомство.</p>
+                    <div class="contact__links">
+                        <a href="tel:+79991234567" class="contact__phone">+7 999 123-45-67</a>
+                        <a href="mailto:hello@euno.agency" class="contact__email">hello@euno.agency</a>
+                    </div>
+                </div>
+                <div class="contact__form">
+                     <form id="lead-form">
+                        <label>Имя<input type="text" name="name" required></label>
+                        <label>Телефон<input type="tel" name="phone" required></label>
+                        <label>Email<input type="email" name="email" required></label>
+                        <label>Компания<input type="text" name="company"></label>
+                        <label class="consent">
+                            <input type="checkbox" name="consent" required> Я соглашаюсь на обработку персональных данных
+                        </label>
+                        <button type="submit" class="cta-btn">Отправить заявку</button>
+                    </form>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="footer"></footer>
+    <footer class="footer">
+        <div class="container footer__container">
+            <p>© EUNO 2025</p>
+            <nav class="footer__nav">
+                <a href="https://t.me/yourtelegram" target="_blank">Telegram</a>
+                <a href="https://wa.me/79991234567" target="_blank">WhatsApp</a>
+            </nav>
+            <a href="#top">Наверх</a>
+        </div>
+    </footer>
 
     <script src="assets/js/script.js" defer></script>
 </body>
