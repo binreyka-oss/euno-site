@@ -163,6 +163,11 @@ img { max-width: 100%; height: auto; display: block; }
 .card-optimal .card-badge { background: var(--black); }
 .card-premium .card-badge { background: var(--accent-red); }
 
+/* PORTFOLIO */
+.portfolio { padding: 120px 0; background-color: var(--light-gray); }
+.portfolio-placeholder { text-align: center; padding: 80px 20px; border: 2px dashed var(--border-color); border-radius: 10px; }
+.portfolio-placeholder p { font-size: 1.2rem; line-height: 1.7; margin-bottom: 30px; }
+
 /* METRICS */
 .metrics { padding: 120px 0; }
 .metrics-description-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; text-align: left; }
@@ -206,7 +211,6 @@ img { max-width: 100%; height: auto; display: block; }
     .cards-grid, .principles-grid, .metrics-description-grid { grid-template-columns: 1fr; }
     .card { max-width: 600px; margin: 0 auto; }
 }
-
 @media (min-width: 1024px) {
   .card {
     display: flex;
