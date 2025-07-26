@@ -146,7 +146,7 @@ img { max-width: 100%; height: auto; display: block; }
 .card .price.single-price span { font-size: 1rem; color: var(--gray); font-family: var(--font-main); }
 .subscriptions .price.single-price { color: var(--accent-red); }
 .card .note { color: var(--gray); font-size: .9rem; margin-bottom: 1.5rem; }
-.card ul { list-style: none; margin-bottom: 1.5rem; }
+.card ul { list-style: none; margin-bottom: 1.5rem; padding-left: 0; }
 .card ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
 .card ul li::before { content: '✓'; color: var(--black); position: absolute; left: 0; }
 .card ul li strong { font-weight: 700; }
@@ -175,7 +175,6 @@ img { max-width: 100%; height: auto; display: block; }
 .metric-description-item p { color: var(--gray); }
 .metric-description-item p:not(:last-child) { margin-bottom: 1rem; }
 .metric-description-item strong { color: var(--black); font-weight: 500; }
-.metrics-note { text-align: center; color: var(--gray); margin-top: 40px; }
 
 /* CONTACT */
 .contact { padding: 120px 0; background: var(--light-gray); }
@@ -211,6 +210,7 @@ img { max-width: 100%; height: auto; display: block; }
     .cards-grid, .principles-grid, .metrics-description-grid { grid-template-columns: 1fr; }
     .card { max-width: 600px; margin: 0 auto; }
 }
+
 @media (min-width: 1024px) {
   .card {
     display: flex;
