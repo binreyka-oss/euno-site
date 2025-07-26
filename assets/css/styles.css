@@ -96,21 +96,9 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .hero h1 {
     position: relative;
-    z-index: 2; /* Поднимаем текст над подложкой */
+    z-index: 3;
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-family: var(--font-headings);
-}
-/* ИЗМЕНЕНИЕ: Новый стиль для мягкой радиальной подложки-размытия */
-.hero h1::before {
-    content: '';
-    position: absolute;
-    inset: -40px;
-    z-index: -1;
-    background: rgba(255, 255, 255, 0.01);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    mask-image: radial-gradient(ellipse, black 40%, transparent 70%);
-    -webkit-mask-image: radial-gradient(ellipse, black 40%, transparent 70%);
 }
 .hero__slogans-bg {
     position: absolute;
@@ -186,18 +174,50 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 
-/* ABOUT */
-.about { padding: 120px 0; }
+/* ABOUT & VIDEO BACKGROUND */
+.about {
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+}
+/* ИЗМЕНЕНИЕ: Добавлены стили для видеофона и оверлея */
+.about__video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 1;
+    object-fit: cover;
+}
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 2;
+}
 .about__container {
+    position: relative;
+    z-index: 3;
     display: flex;
     justify-content: center;
 }
 .about__text {
     max-width: 800px;
     text-align: center;
+    /* ИЗМЕНЕНИЕ: Цвет текста сделан белым для читаемости */
+    color: var(--white);
 }
 .about__text .section-title {
     text-align: center;
+    color: var(--white);
 }
 .about__text p {
     font-size: 1.2rem;
@@ -209,7 +229,8 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .about__text p em {
     font-style: normal;
-    color: var(--accent-red);
+    color: var(--white);
+    opacity: 0.8;
 }
 
 /* PROCESS */
@@ -265,7 +286,7 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .card .note { color: var(--gray); font-size: .9rem; margin-bottom: 1.5rem; }
 .card ul { list-style: none; margin-bottom: 1.5rem; }
-.card .card-list-primary + h4 { margin-top: auto; } /* Push "Что получаете" down */
+.card .card-list-primary + h4 { margin-top: auto; }
 .card ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
 .card ul li::before { content: '✓'; color: var(--black); position: absolute; left: 0; }
 .card ul li strong { font-weight: 700; }
@@ -373,7 +394,6 @@ img { max-width: 100%; height: auto; display: block; }
         margin: 0 auto;
     }
 }
-/* ИЗМЕНЕНИЕ: Правило для выравнивания карточек на десктопе */
 @media (min-width: 1025px) {
     .card .card-list-primary {
         min-height: 150px;
