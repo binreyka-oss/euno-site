@@ -96,24 +96,21 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .hero h1 {
     position: relative;
-    z-index: 3;
+    z-index: 2; /* Поднимаем текст над подложкой */
     font-size: clamp(2.5rem, 5vw, 4rem);
-    /* ИЗМЕНЕНИЕ: Установлен правильный шрифт для заголовка */
     font-family: var(--font-headings);
 }
-.hero h1 span.letter-wrap {
-    position: relative;
-    display: inline-block;
-}
-.hero h1 span.letter-wrap::before {
+/* ИЗМЕНЕНИЕ: Новый стиль для мягкой радиальной подложки-размытия */
+.hero h1::before {
     content: '';
     position: absolute;
-    inset: -5px;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    inset: -40px;
     z-index: -1;
-    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.01);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    mask-image: radial-gradient(ellipse, black 40%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse, black 40%, transparent 70%);
 }
 .hero__slogans-bg {
     position: absolute;
@@ -267,7 +264,8 @@ img { max-width: 100%; height: auto; display: block; }
     color: var(--accent-red);
 }
 .card .note { color: var(--gray); font-size: .9rem; margin-bottom: 1.5rem; }
-.card ul { list-style: none; margin-bottom: 1.5rem; flex-grow: 1; }
+.card ul { list-style: none; margin-bottom: 1.5rem; }
+.card .card-list-primary + h4 { margin-top: auto; } /* Push "Что получаете" down */
 .card ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
 .card ul li::before { content: '✓'; color: var(--black); position: absolute; left: 0; }
 .card ul li strong { font-weight: 700; }
@@ -279,7 +277,7 @@ img { max-width: 100%; height: auto; display: block; }
     text-align: center;
     font-weight: 500;
     cursor: pointer;
-    margin-top: auto;
+    margin-top: 25px;
     transition: background .3s, color .3s;
 }
 .card .card-cta:hover { background: var(--white); color: var(--accent-red); }
@@ -373,6 +371,15 @@ img { max-width: 100%; height: auto; display: block; }
     .card {
         max-width: 600px;
         margin: 0 auto;
+    }
+}
+/* ИЗМЕНЕНИЕ: Правило для выравнивания карточек на десктопе */
+@media (min-width: 1025px) {
+    .card .card-list-primary {
+        min-height: 150px;
+    }
+    .card {
+        flex-grow: 1;
     }
 }
 
