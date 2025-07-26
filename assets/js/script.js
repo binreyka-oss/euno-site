@@ -21,11 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const column = document.createElement('div');
             column.className = 'slogan-column';
             
-            // Shuffle and slice slogans for variety in each column
             const shuffledSlogans = [...slogans].sort(() => 0.5 - Math.random());
             const columnSlogans = shuffledSlogans.slice(0, 15);
 
-            // Duplicate slogans for infinite scroll effect
             const columnContent = [...columnSlogans, ...columnSlogans];
             
             columnContent.forEach(text => {
@@ -54,14 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setTimeout(() => {
                 trail.remove();
-            }, 1000); // Удаляем элемент после завершения анимации
+            }, 1000);
 
             setTimeout(() => {
                 canCreateTrail = true;
-            }, 50); // Ограничиваем частоту создания элементов
+            }, 50);
         }
     });
-
 
     // --- Burger Menu ---
     const burger = document.getElementById('burger-menu');
@@ -84,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // --- Interactive Process Tabs ---
     const tabs = document.querySelectorAll('.process-tab');
     const contents = document.querySelectorAll('.process-content');
@@ -102,6 +98,28 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // --- Accordion Logic ---
+    const accordionGroups = document.querySelectorAll('.accordion-grid');
+
+    accordionGroups.forEach(group => {
+        const items = group.querySelectorAll('.accordion-item');
+        
+        items.forEach((clickedItem) => {
+            const header = clickedItem.querySelector('.accordion-header');
+            header.addEventListener('click', () => {
+                const isActive = clickedItem.classList.contains('active');
+
+                items.forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    clickedItem.classList.add('active');
+                }
+            });
+        });
+    });
 
     // --- Form Submission ---
     const leadForm = document.getElementById('lead-form');
@@ -123,8 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
         button.disabled = true;
         button.textContent = 'Отправка...';
         try {
-            // ВАЖНО: '/api/lead' - это адрес для отправки. 
-            // Vercel может автоматически обрабатывать файлы в папке /api как serverless-функции.
             const res = await fetch('/api/lead', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -137,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Ошибка отправки. Попробуйте снова позже.');
             }
         } catch (err) {
-            // Для демонстрации на GitHub Pages можно убрать try-catch и просто показывать alert
             console.error("Ошибка отправки формы:", err);
             alert('Произошла ошибка сети. Для демонстрации форма не отправляется.');
             form.reset();
