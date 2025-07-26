@@ -40,9 +40,10 @@
 
 /* BASE & RESET */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-/* ИЗМЕНЕНИЕ: Добавлено свойство для исправления горизонтальной прокрутки */
-body { background-color: var(--white); color: var(--black); font-family: var(--font-main); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+html, body {
+    overflow-x: hidden;
+}
+body { background-color: var(--white); color: var(--black); font-family: var(--font-main); font-size: 16px; line-height: 1.6; }
 body.no-scroll { overflow: hidden; }
 .container { width: 90%; max-width: 1440px; margin: 0 auto; padding: 0 20px; }
 a { color: var(--black); text-decoration: none; transition: color 0.3s ease; }
@@ -70,9 +71,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* HEADER */
 .header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border-color); }
-.header__container { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.header__container { display: flex; align-items: center; justify-content: space-between; height: 80px; }
 .header__brand { display: flex; align-items: center; gap: 12px; z-index: 101; }
-.header__logo { height: 50px; }
+.header__logo { height: 60px; }
 .header__nav { display: flex; gap: 30px; font-weight: 500; }
 .header__nav a { position: relative; padding-bottom: 5px; }
 .header__nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--accent-red); transition: width 0.3s ease; }
@@ -131,12 +132,8 @@ img { max-width: 100%; height: auto; display: block; }
 .subscriptions { background: var(--white); }
 
 .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: stretch; }
-/* ИЗМЕНЕНИЕ: Карточка теперь flex-контейнер для надежного выравнивания */
-.card { background: var(--white); border: 1px solid var(--border-color); padding: 30px; display: flex; flex-direction: column; transition: transform .3s ease, box-shadow .3s ease; }
+.card { background: var(--white); border: 1px solid var(--border-color); padding: 30px; transition: transform .3s ease, box-shadow .3s ease; }
 .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,.05); }
-.card__header { flex-shrink: 0; } /* Заголовок не сжимается */
-.card__body { flex-grow: 1; display: flex; flex-direction: column; } /* Тело карточки занимает все доступное место */
-.card__section:last-child { margin-top: auto; } /* Последняя секция "прижимается" к низу тела карточки */
 .card h3 { font-family: var(--font-headings); font-size: 1.5rem; margin-bottom: 1rem; }
 .card h4 { font-family: var(--font-headings); font-size: 1.1rem; margin-top: 25px; margin-bottom: 15px; font-weight: 500; padding-bottom: 5px; border-bottom: 1px solid var(--border-color); }
 .card .price { margin-bottom: 1rem; }
@@ -153,7 +150,7 @@ img { max-width: 100%; height: auto; display: block; }
 .card ul li { padding-left: 20px; position: relative; margin-bottom: 10px; }
 .card ul li::before { content: '✓'; color: var(--black); position: absolute; left: 0; }
 .card ul li strong { font-weight: 700; }
-.card .card-cta { background: var(--accent-red); color: var(--white); border: 1px solid var(--accent-red); padding: 15px; text-align: center; font-weight: 500; cursor: pointer; margin-top: 25px; flex-shrink: 0; transition: background .3s, color .3s; }
+.card .card-cta { background: var(--accent-red); color: var(--white); border: 1px solid var(--accent-red); padding: 15px; text-align: center; font-weight: 500; cursor: pointer; transition: background .3s, color .3s; }
 .card .card-cta:hover { background: var(--white); color: var(--accent-red); }
 
 /* Card Badges */
@@ -226,12 +223,24 @@ img { max-width: 100%; height: auto; display: block; }
     .metrics-grid { grid-template-columns: 1fr; gap: 60px; }
     .process-tabs { flex-wrap: wrap; }
     .process-tab { flex-basis: 50%; white-space: normal; }
-    /* Отключаем специальное выравнивание для карточек на мобильных */
-    .card { display: flex; flex-direction: column; }
-    .card__body { flex-grow: 0; display: block; }
-    .card__section:last-child { margin-top: 0; }
 }
 
 @media(max-width: 480px) {
     .process-tab { flex-basis: 100%; text-align: left; padding-left: 10px; }
+}
+
+/* ИЗМЕНЕНИЕ: Новая логика выравнивания карточек для десктопов */
+@media (min-width: 1025px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+  .card__body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .card__body .card__section:last-of-type {
+    margin-top: auto;
+  }
 }
