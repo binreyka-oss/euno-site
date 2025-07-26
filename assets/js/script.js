@@ -1,9 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Ticker Slogan Animation ---
+    // ИЗМЕНЕНИЕ: Старый код для Ticker'а заменен на код для плавающих кругов
+    // --- Floating Slogan Bubbles ---
     const sloganContainer = document.getElementById('slogans-container');
-    if (sloganContainer && window.matchMedia("(min-width: 769px)").matches) {
+    const heroSection = document.querySelector('.hero');
+    if (sloganContainer && heroSection && window.matchMedia("(min-width: 769px)").matches) {
         const slogans = [
             "ты знаешь как вырасти", "ты знаешь важность eNPS", "ты знаешь свой путь", "ты знаешь силу идеи", "ты знаешь силу бренда", 
             "ты знаешь как вдохновлять", "ты знаешь смысл изменений", "ты знаешь свой потенциал", "ты знаешь где твое преимущество",
@@ -15,22 +17,117 @@ document.addEventListener('DOMContentLoaded', () => {
             "ты знаешь, как удержать внимание", "ты знаешь, что объединяет команду", "ты знаешь, что берет за душу",
             "ты знаешь, что создает доверие", "ты знаешь, что делает мир лучше"
         ];
-        
-        const numColumns = 7;
-        for (let i = 0; i < numColumns; i++) {
-            const column = document.createElement('div');
-            column.className = 'slogan-column';
-            const shuffledSlogans = [...slogans].sort(() => 0.5 - Math.random());
-            const columnSlogans = shuffledSlogans.slice(0, 15);
-            const columnContent = [...columnSlogans, ...columnSlogans];
-            columnContent.forEach(text => {
-                const span = document.createElement('span');
-                span.textContent = text;
-                column.appendChild(span);
+        let bubbles = [];
+        let animationFrameId;
+
+        function createBubbles() {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+            bubbles = [];
+            sloganContainer.innerHTML = '';
+            
+            const bounds = heroSection.getBoundingClientRect();
+            const containerRect = sloganContainer.getBoundingClientRect();
+            
+            if (bounds.width === 0) return;
+
+            const headline = document.getElementById('main-headline');
+            const deadZoneRect = headline.getBoundingClientRect();
+            
+            const deadZone = {
+                top: deadZoneRect.top - containerRect.top,
+                right: deadZoneRect.right - containerRect.left,
+                bottom: deadZoneRect.bottom - containerRect.top,
+                left: deadZoneRect.left - containerRect.left,
+            };
+
+            slogans.forEach(sloganText => {
+                const span = document.createElement('div');
+                span.className = 'slogan-bubble';
+                span.textContent = sloganText;
+                
+                const size = 120 + Math.random() * 50;
+                const bubble = {
+                    element: span, x: 0, y: 0,
+                    vx: (Math.random() - 0.5) * 1.0,
+                    vy: (Math.random() - 0.5) * 1.0,
+                    size: size, radius: size / 2
+                };
+                
+                const containerWidth = sloganContainer.offsetWidth;
+                const containerHeight = sloganContainer.offsetHeight;
+
+                do {
+                    bubble.x = Math.random() * (containerWidth - size);
+                    bubble.y = Math.random() * (containerHeight - size);
+                } while (
+                    bubble.x + size > deadZone.left - 50 && bubble.x < deadZone.right + 50 &&
+                    bubble.y + size > deadZone.top - 50 && bubble.y < deadZone.bottom + 50
+                );
+
+                span.style.width = `${size}px`;
+                span.style.height = `${size}px`;
+                span.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
+                sloganContainer.appendChild(span);
+                bubbles.push(bubble);
             });
-            sloganContainer.appendChild(column);
+            
+            animateBubbles();
         }
+        
+        function animateBubbles() {
+            const containerWidth = sloganContainer.offsetWidth;
+            const containerHeight = sloganContainer.offsetHeight;
+
+            bubbles.forEach((bubble, i) => {
+                bubble.x += bubble.vx;
+                bubble.y += bubble.vy;
+
+                if (bubble.x <= 0) { bubble.x = 0; bubble.vx *= -1; }
+                if (bubble.x >= containerWidth - bubble.size) { bubble.x = containerWidth - bubble.size; bubble.vx *= -1; }
+                if (bubble.y <= 0) { bubble.y = 0; bubble.vy *= -1; }
+                if (bubble.y >= containerHeight - bubble.size) { bubble.y = containerHeight - bubble.size; bubble.vy *= -1; }
+
+                for (let j = i + 1; j < bubbles.length; j++) {
+                    const otherBubble = bubbles[j];
+                    const dx = (otherBubble.x + otherBubble.radius) - (bubble.x + bubble.radius);
+                    const dy = (otherBubble.y + otherBubble.radius) - (bubble.y + bubble.radius);
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const minDistance = bubble.radius + otherBubble.radius;
+
+                    if (distance < minDistance) {
+                        const angle = Math.atan2(dy, dx);
+                        const overlap = (minDistance - distance) / 2;
+                        bubble.x -= overlap * Math.cos(angle);
+                        bubble.y -= overlap * Math.sin(angle);
+                        otherBubble.x += overlap * Math.cos(angle);
+                        otherBubble.y += overlap * Math.sin(angle);
+                        
+                        const tempVx = bubble.vx;
+                        const tempVy = bubble.vy;
+                        bubble.vx = otherBubble.vx;
+                        bubble.vy = otherBubble.vy;
+                        otherBubble.vx = tempVx;
+                        otherBubble.vy = tempVy;
+                    }
+                }
+                bubble.element.style.transform = `translate(${bubble.x}px, ${bubble.y}px)`;
+            });
+            animationFrameId = requestAnimationFrame(animateBubbles);
+        }
+
+        const observer = new ResizeObserver(entries => {
+            if (entries[0].contentRect.width > 0) {
+                createBubbles();
+                observer.disconnect();
+            }
+        });
+        
+        observer.observe(heroSection);
+        window.addEventListener('resize', createBubbles); 
     }
+
 
     // --- Emoji Cursor Trail ---
     const foodEmojis = ['🍕', '🍔', '🍟', '🍣', '🍩', '🍦', '🍪', '🥑', '🌮', '🍓', '🍉', '🍇', '🍎', '🥕', '🥦', '☕️', '🍹', '🍺', '🍷', '🍰', '🍿', '🥐'];
