@@ -1,5 +1,6 @@
+
 export default async function handler(request, response) {
-  // 1. Принимаем только POST запросы, остальные отклоняем
+  // 1. Принимаем только POST запросы
   if (request.method !== 'POST') {
     return response.status(405).json({ message: 'Method Not Allowed' });
   }
@@ -8,27 +9,28 @@ export default async function handler(request, response) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
+  // Проверяем, что ключи вообще существуют
   if (!botToken || !chatId) {
-    return response.status(500).json({ message: 'Telegram bot credentials are not configured.' });
+    console.error('Telegram credentials not configured in Vercel environment variables.');
+    return response.status(500).json({ message: 'Server configuration error.' });
   }
-
-  // 3. Получаем данные из формы (из тела запроса)
-  const { name, phone, email, company } = request.body;
-
-  // 4. Формируем красивое сообщение для Telegram (используем Markdown)
-  let message = `*Новая заявка с сайта EUNO!*\n\n`;
-  message += `*Имя:* ${name}\n`;
-  message += `*Телефон:* ${phone}\n`;
-  message += `*Email:* ${email}\n`;
-  if (company) {
-    message += `*Компания:* ${company}\n`;
-  }
-
-  // 5. Собираем URL для отправки в Telegram API
-  const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
   try {
-    // 6. Отправляем запрос в Telegram API
+    // 3. Получаем данные из формы
+    const { name, phone, email, company } = request.body;
+
+    // 4. Формируем сообщение для Telegram
+    let message = `*Новая заявка с сайта EUNO!*\n\n`;
+    message += `*Имя:* ${name}\n`;
+    message += `*Телефон:* ${phone}\n`;
+    message += `*Email:* ${email}\n`;
+    if (company) {
+      message += `*Компания:* ${company}\n`;
+    }
+    
+    // 5. Готовим и отправляем запрос в Telegram API
+    const telegramApiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
     const telegramResponse = await fetch(telegramApiUrl, {
       method: 'POST',
       headers: {
@@ -37,23 +39,25 @@ export default async function handler(request, response) {
       body: JSON.stringify({
         chat_id: chatId,
         text: message,
-        parse_mode: 'Markdown', // Включаем разметку для жирного текста и т.д.
+        parse_mode: 'Markdown',
       }),
     });
 
     const telegramResult = await telegramResponse.json();
 
-    // 7. Проверяем, успешно ли Telegram принял сообщение
+    // 6. Проверяем, что Telegram ответил успехом
     if (!telegramResult.ok) {
+      // Если Telegram вернул ошибку, логируем её для отладки
+      console.error('Telegram API Error:', telegramResult.description);
       throw new Error(telegramResult.description);
     }
 
-    // 8. Отправляем успешный ответ обратно на сайт
-    response.status(200).json({ message: 'Success' });
+    // 7. Отправляем успешный ответ на сайт
+    return response.status(200).json({ message: 'Success' });
 
   } catch (error) {
-    // В случае ошибки, логируем её и отправляем ошибку на сайт
-    console.error('Error sending message to Telegram:', error);
-    response.status(500).json({ message: 'Error sending message' });
+    // В случае любой ошибки, логируем её и отправляем ошибку 500
+    console.error('Internal Server Error:', error);
+    return response.status(500).json({ message: 'Failed to send message.' });
   }
 }
