@@ -100,6 +100,7 @@ img { max-width: 100%; height: auto; display: block; }
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-family: var(--font-headings);
 }
+/* ИЗМЕНЕНИЕ: Восстановлен стиль для мягкой радиальной подложки-размытия */
 .hero h1::before {
     content: '';
     position: absolute;
