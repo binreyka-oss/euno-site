@@ -71,9 +71,9 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* HEADER */
 .header { position: fixed; top: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid var(--border-color); }
-.header__container { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+.header__container { display: flex; align-items: center; justify-content: space-between; height: 80px; }
 .header__brand { display: flex; align-items: center; gap: 12px; z-index: 101; }
-.header__logo { height: 55px; object-fit: contain; }
+.header__logo { height: 60px; object-fit: contain; }
 .header__nav { display: flex; gap: 30px; font-weight: 500; }
 .header__nav a { position: relative; padding: 5px 0; font-size: 1.15rem; }
 .header__nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--accent-red); transition: width 0.3s ease; }
@@ -100,16 +100,26 @@ img { max-width: 100%; height: auto; display: block; }
 .principle-item h3 { font-family: var(--font-headings); font-size: 1.5rem; margin-bottom: 15px; position: relative; z-index: 2; }
 .principle-item p { font-size: 1rem; line-height: 1.6; max-width: 300px; position: relative; z-index: 2; }
 
-/* ABOUT & VIDEO BACKGROUND */
+/* ИЗМЕНЕНИЕ: Стили для блока "О нас" полностью переработаны */
 .about { padding: 120px 0; position: relative; overflow: hidden; }
 .about__video-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 1; object-fit: cover; }
 .about::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 2; }
 .about__container { position: relative; z-index: 3; display: flex; justify-content: center; }
-.about__text { max-width: 800px; text-align: center; color: var(--white); }
-.about__text .section-title { text-align: center; color: var(--white); }
-.about__text p { font-size: 1.2rem; line-height: 1.7; margin-bottom: 25px; }
-.about__text p strong { font-weight: 700; }
-.about__text p em { font-style: normal; color: var(--white); opacity: 0.8; }
+.about__intro { max-width: 800px; text-align: center; color: var(--white); }
+.about__intro .section-title { color: var(--white); }
+.about__intro p { font-size: 1.2rem; line-height: 1.7; }
+.about__intro p strong { font-weight: 500; }
+
+/* ИЗМЕНЕНИЕ: Добавлены стили для нового блока "Основатель" */
+.founder { padding: 120px 0; background: var(--light-gray); }
+.founder__container { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
+.founder__photo img { width: 100%; border-radius: 10px; }
+.founder__text h3 { font-family: var(--font-headings); font-size: 1.8rem; margin-bottom: 20px; }
+.founder__text blockquote { margin: 0; padding: 0; border: none; }
+.founder__text blockquote p { margin-bottom: 1em; font-size: 1.1rem; color: var(--gray); }
+.founder__text blockquote p:last-child { margin-bottom: 0; }
+.founder__text blockquote strong { color: var(--black); font-weight: 500; }
+
 
 /* PROCESS */
 .process { padding: 120px 0; background: var(--light-gray); }
@@ -209,7 +219,7 @@ img { max-width: 100%; height: auto; display: block; }
 @media(max-width: 1023px) {
     .cards-grid, .principles-grid, .metrics-description-grid { grid-template-columns: 1fr; }
     .card { max-width: 600px; margin: 0 auto; }
-    .about__founder { grid-template-columns: 1fr; text-align: center; }
+    .founder__container { grid-template-columns: 1fr; text-align: center; }
     .founder__photo { max-width: 300px; margin: 0 auto; }
 }
 
