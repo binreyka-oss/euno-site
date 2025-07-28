@@ -100,18 +100,24 @@ img { max-width: 100%; height: auto; display: block; }
 .principle-item h3 { font-family: var(--font-headings); font-size: 1.5rem; margin-bottom: 15px; position: relative; z-index: 2; }
 .principle-item p { font-size: 1rem; line-height: 1.6; max-width: 300px; position: relative; z-index: 2; }
 
-/* ИЗМЕНЕНИЕ: Стили для блока "О нас" полностью переработаны */
-.about { padding: 120px 0; position: relative; overflow: hidden; }
+/* ИЗМЕНЕНИЕ: Скорректированы стили для блока "О нас" с видеофоном */
+.about {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    min-height: 70vh; /* Возвращаем высоту блоку */
+}
 .about__video-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 1; object-fit: cover; }
 .about::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 2; }
 .about__container { position: relative; z-index: 3; display: flex; justify-content: center; }
 .about__intro { max-width: 800px; text-align: center; color: var(--white); }
 .about__intro .section-title { color: var(--white); }
 .about__intro p { font-size: 1.2rem; line-height: 1.7; }
-.about__intro p strong { font-weight: 500; }
+.about__intro strong { font-weight: 500; }
 
-/* ИЗМЕНЕНИЕ: Добавлены стили для нового блока "Основатель" */
-.founder { padding: 120px 0; background: var(--light-gray); }
+/* ИЗМЕНЕНИЕ: Стили для нового блока "Основатель" */
+.founder { padding: 120px 0; background-color: var(--white); }
 .founder__container { display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
 .founder__photo img { width: 100%; border-radius: 10px; }
 .founder__text h3 { font-family: var(--font-headings); font-size: 1.8rem; margin-bottom: 20px; }
@@ -219,7 +225,7 @@ img { max-width: 100%; height: auto; display: block; }
 @media(max-width: 1023px) {
     .cards-grid, .principles-grid, .metrics-description-grid { grid-template-columns: 1fr; }
     .card { max-width: 600px; margin: 0 auto; }
-    .founder__container { grid-template-columns: 1fr; text-align: center; }
+    .founder__container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
     .founder__photo { max-width: 300px; margin: 0 auto; }
 }
 
@@ -251,8 +257,7 @@ img { max-width: 100%; height: auto; display: block; }
     .burger-menu.active span:nth-child(1) { transform: rotate(45deg); }
     .burger-menu.active span:nth-child(2) { opacity: 0; transform: translateX(20px); }
     .burger-menu.active span:nth-child(3) { transform: rotate(-45deg); }
-    .about__container, .contact__container { grid-template-columns: 1fr; }
-    .about__text .section-title, .contact__info .section-title { text-align: center; }
+    .contact__container { grid-template-columns: 1fr; }
     .contact__info { text-align: center; }
     .contact__links { align-items: center; }
     .contact__socials { justify-content: center; }
