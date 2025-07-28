@@ -47,7 +47,6 @@ export default async function handler(request, response) {
 
     // 6. Проверяем, что Telegram ответил успехом
     if (!telegramResult.ok) {
-      // Если Telegram вернул ошибку, логируем её для отладки
       console.error('Telegram API Error:', telegramResult.description);
       throw new Error(telegramResult.description);
     }
@@ -56,7 +55,6 @@ export default async function handler(request, response) {
     return response.status(200).json({ message: 'Success' });
 
   } catch (error) {
-    // В случае любой ошибки, логируем её и отправляем ошибку 500
     console.error('Internal Server Error:', error);
     return response.status(500).json({ message: 'Failed to send message.' });
   }
